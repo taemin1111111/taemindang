@@ -1,0 +1,342 @@
+/* 모바일 컨테이너 - PC에서도 가운데에 딱 뜨게 */
+.mobile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 모바일 화면 (375px 고정) */
+.onboarding-screen {
+  width: 375px;
+  height: 812px;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+}
+
+/* 상태바 - Figma 디자인 정확히 구현 */
+.status-bar {
+  width: 375px;
+  height: 44px;
+  position: relative;
+  background-color: #2b2b2b;
+}
+
+.status-bar-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.status-time {
+  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: -0.5px;
+  position: absolute;
+  left: 45px; /* 상태바 전체 기준 */
+  top: 12px; /* 상태바 전체 기준 */
+  width: 54px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  transform: translateX(-50%); /* 중앙 정렬 */
+  white-space: pre-wrap;
+}
+
+.status-icons {
+  position: absolute;
+  right: 17.67px; /* 상태바 전체 기준 오른쪽에서 17.67px */
+  top: 16.33px; /* 상태바 전체 기준 위에서 16.33px */
+  width: 66.66px;
+  height: 11.336px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.status-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: fill;
+  max-width: none;
+  image-rendering: auto;
+}
+
+/* 메인 콘텐츠 영역 */
+.onboarding-content {
+  position: absolute;
+  top: 238px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 212px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+/* 로고 섹션 */
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.logo-container {
+  width: 56.959px;
+  height: 98.001px;
+  position: relative;
+}
+
+.logo-vector {
+  position: absolute;
+  top: 0;
+  left: 12.37%;
+  right: 18.44%;
+  bottom: 64.91%;
+}
+
+.logo-union {
+  position: absolute;
+  top: 36.84%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.logo-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 텍스트 섹션 */
+.text-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  text-align: center;
+  color: #2b2b2b;
+}
+
+.main-title {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.45px;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.subtitle-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.subtitle {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.35px;
+  margin: 0;
+}
+
+/* 푸터 영역 */
+.onboarding-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  padding-top: 8px;
+  padding-bottom: 34px; /* 제거된 인디케이터 높이만큼 추가 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* 버튼 섹션 */
+.button-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
+  padding-bottom: 4px;
+}
+
+.buttons-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+/* 카카오 버튼 */
+.btn-kakao {
+  width: 100%;
+  height: 52px;
+  background-color: #fee500;
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  box-sizing: border-box;
+  outline: none;
+  position: relative;
+}
+
+.btn-kakao:hover {
+  opacity: 0.9;
+}
+
+.btn-kakao:active {
+  opacity: 0.8;
+}
+
+.btn-kakao:focus {
+  outline: none;
+}
+
+.kakao-icon {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  max-width: 24px;
+  max-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  box-sizing: border-box;
+}
+
+.kakao-icon img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.btn-kakao-text {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.45px;
+  text-align: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* 시작하기 버튼 */
+.btn-start {
+  width: 335px;
+  height: 52px;
+  background-color: #ff6f0f;
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  box-sizing: border-box;
+}
+
+.btn-start:hover {
+  opacity: 0.9;
+}
+
+.btn-start:active {
+  opacity: 0.8;
+}
+
+.btn-start span {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #ffffff;
+  letter-spacing: -0.45px;
+}
+
+/* 로그인 링크 */
+.login-link {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.35px;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.login-text {
+  color: #b9b9b9;
+}
+
+.login-link-text {
+  color: #ff6f0f;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.login-link-text:hover {
+  opacity: 0.8;
+}
+
+
+/* 반응형 - 작은 화면에서는 전체 너비 사용 */
+@media (max-width: 415px) {
+  .mobile-container {
+    padding: 0;
+  }
+  
+  .onboarding-screen {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+}

@@ -1,0 +1,488 @@
+/* 모바일 컨테이너 */
+.mobile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 상품 상세 화면 */
+.item-detail-screen {
+  width: 375px;
+  height: 812px;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+}
+
+/* 이미지 섹션 */
+.item-image-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 375px;
+  height: 373px;
+  background-color: #bbc0c4;
+  overflow: hidden;
+}
+
+.item-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-main-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f7f8f9;
+}
+
+.item-image-counter {
+  position: absolute;
+  bottom: 40px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 3px 12px;
+  border-radius: 20px;
+  color: #ffffff;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.3px;
+  z-index: 10;
+}
+
+.item-image-prev,
+.item-image-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+  color: #ffffff;
+  font-size: 32px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.2s;
+}
+
+.item-image-prev:hover,
+.item-image-next:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.item-image-prev {
+  left: 16px;
+}
+
+.item-image-next {
+  right: 16px;
+}
+
+/* 네비게이션 바 */
+.item-nav-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 375px;
+  height: 44px;
+  z-index: 100;
+}
+
+.item-nav-content {
+  position: absolute;
+  left: 16px;
+  top: 0;
+  width: 343px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.item-nav-left {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 10px 0;
+}
+
+.item-back-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+
+.item-back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: brightness(0) invert(1); /* 이미지를 흰색(#FFFFFF)으로 변환 */
+}
+
+.item-nav-right {
+  width: 104px;
+  height: 44px;
+}
+
+/* 메인 콘텐츠 */
+.item-content {
+  position: absolute;
+  top: 373px;
+  left: 0;
+  width: 375px;
+  padding-bottom: 120px;
+  overflow-y: auto;
+  max-height: calc(812px - 373px - 60px);
+  /* 스크롤바 숨기기 (스크롤은 가능) */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.item-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* 판매자 정보 섹션 */
+.item-seller-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #eceff1;
+  background-color: #ffffff;
+}
+
+.item-seller-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.item-seller-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #f7f8f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2b2b2b;
+  flex-shrink: 0;
+}
+
+.item-seller-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.item-seller-name {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.4px;
+  margin: 0;
+}
+
+.item-seller-location {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #a1a1a1;
+  letter-spacing: -0.35px;
+  margin: 0;
+}
+
+.item-seller-temp {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.item-seller-temp span {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #ff6f0f;
+  letter-spacing: -0.4px;
+}
+
+/* 상품 정보 섹션 */
+.item-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 16px;
+}
+
+.item-title {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+.item-price-large {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.45px;
+  margin: 0;
+}
+
+.item-time {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #a2a5ac;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.item-description {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.35px;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* 판매자의 다른 상품 섹션 */
+.item-other-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 16px 20px;
+}
+
+.item-other-header {
+  background-color: #ffffff;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.item-other-title {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #212224;
+  letter-spacing: -0.4px;
+  margin: 0;
+}
+
+.item-other-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.item-other-card {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  width: 169px;
+}
+
+.item-other-image {
+  width: 100%;
+  height: 127px;
+  border-radius: 8px;
+  object-fit: cover;
+  background-color: #f7f8f9;
+}
+
+.item-other-image-placeholder {
+  width: 100%;
+  height: 127px;
+  border-radius: 8px;
+  background-color: #f7f8f9;
+}
+
+.item-other-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item-other-name {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.35px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.item-other-price {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #212224;
+  letter-spacing: -0.4px;
+  margin: 0;
+}
+
+/* 하단 고정 바 */
+.item-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 375px;
+  background-color: #ffffff;
+  border-top: 1px solid #d0d0d0;
+  padding-bottom: 34px;
+  z-index: 100;
+}
+
+.item-footer-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+}
+
+.item-heart-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.item-heart-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.item-footer-price {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #212224;
+  letter-spacing: -0.4px;
+  flex-shrink: 0;
+  width: 57px;
+  text-align: center;
+}
+
+.item-chat-btn {
+  flex: 1;
+  height: 40px;
+  background-color: #ff6f0f;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.35px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 16px;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.item-chat-btn:hover {
+  opacity: 0.9;
+}
+
+.item-chat-btn:active {
+  opacity: 0.8;
+}
+
+/* 반응형 */
+@media (max-width: 415px) {
+  .mobile-container {
+    padding: 0;
+  }
+  
+  .item-detail-screen {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .item-image-section {
+    width: 100vw;
+  }
+
+  .item-nav-bar {
+    width: 100vw;
+  }
+
+  .item-content {
+    width: 100vw;
+  }
+
+  .item-footer {
+    width: 100vw;
+  }
+}

@@ -1,0 +1,533 @@
+/* 모바일 컨테이너 */
+.mobile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 글쓰기 화면 */
+.write-post-screen {
+  width: 375px;
+  height: 812px;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+}
+
+/* 네비게이션 바 */
+.write-nav-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 375px;
+  height: 44px;
+  background-color: #ffffff;
+  z-index: 100;
+}
+
+.write-nav-content {
+  position: absolute;
+  left: 16px;
+  top: 0;
+  width: 343px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.write-nav-left {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 10px 0;
+  flex-shrink: 0;
+  width: 104px;
+  justify-content: flex-start;
+}
+
+.write-back-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.write-back-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.write-nav-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  flex-shrink: 0;
+  width: 103px;
+}
+
+.write-nav-title h1 {
+  font-family: 'Karrot Sans Text', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #212124;
+  letter-spacing: -0.5px;
+  margin: 0;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.write-nav-right {
+  height: 44px;
+  flex-shrink: 0;
+  width: 104px;
+}
+
+/* 메인 콘텐츠 */
+.write-content {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  right: 0;
+  width: 375px;
+  padding: 30px 16px;
+  padding-bottom: 120px;
+  overflow-y: auto;
+  max-height: calc(812px - 44px - 100px);
+  box-sizing: border-box;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.write-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* 이미지 업로드 섹션 */
+.write-image-section {
+  display: flex;
+  gap: 13px;
+  margin-bottom: 30px;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 6px 0;
+  box-sizing: border-box;
+}
+
+.write-image-section::-webkit-scrollbar {
+  display: none;
+}
+
+.write-image-upload {
+  width: 58px;
+  height: 58px;
+  min-width: 58px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.write-camera-icon {
+  width: 28px;
+  height: 28px;
+  display: block;
+  margin-bottom: 0;
+}
+
+.write-image-count {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #898989;
+  letter-spacing: -0.3px;
+  text-align: center;
+  margin: 0;
+}
+
+.write-image-count-active {
+  color: #ff6f0f;
+}
+
+.write-image-slot {
+  width: 58px;
+  height: 58px;
+  min-width: 58px;
+  position: relative;
+  flex-shrink: 0;
+  overflow: visible;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.write-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f7f8f9;
+  border-radius: 6px;
+  border: 1px solid #d0d0d0;
+}
+
+.write-image-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #d0d0d0;
+}
+
+.write-image-remove {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.write-close-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  object-fit: contain;
+}
+
+.write-image-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #ffffff;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.225px;
+  text-align: center;
+  padding: 2px 6px;
+  border-radius: 0 0 6px 6px;
+}
+
+/* 입력 폼 */
+.write-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.write-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.write-input-label {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.625;
+  color: #727982;
+  letter-spacing: -0.4px;
+  padding: 0 4px;
+}
+
+.write-input-field {
+  background-color: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  padding: 15px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.write-input-field:focus-within {
+  border-color: #898989;
+}
+
+.write-input {
+  width: 100%;
+  border: none;
+  background: none;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.4px;
+  outline: none;
+}
+
+.write-input::placeholder {
+  color: #b9b9b9;
+  font-weight: 500;
+}
+
+.write-input:focus {
+  color: #2b2b2b;
+}
+
+.write-input-field:focus-within .write-input::placeholder {
+  color: #a1a1a1;
+}
+
+.write-textarea-field {
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  padding: 12px 15px;
+  min-height: 150px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  transition: border-color 0.2s;
+}
+
+.write-textarea-field:focus-within {
+  border-color: #898989;
+}
+
+.write-textarea {
+  width: 100%;
+  border: none;
+  background: none;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.4px;
+  outline: none;
+  resize: none;
+  min-height: 126px;
+}
+
+.write-textarea::placeholder {
+  color: #b9b9b9;
+  font-weight: 500;
+}
+
+.write-textarea:focus {
+  color: #2b2b2b;
+}
+
+.write-textarea-field:focus-within .write-textarea::placeholder {
+  color: #a1a1a1;
+}
+
+.write-category-buttons {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  width: auto;
+  min-width: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  touch-action: pan-x;
+  cursor: grab;
+  user-select: none;
+}
+
+.write-category-buttons:active {
+  cursor: grabbing;
+}
+
+.write-category-buttons::-webkit-scrollbar {
+  display: none;
+}
+
+.write-category-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  background-color: #f2f3f6;
+  color: #212224;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.35px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.write-category-btn-active {
+  background-color: #2b2b2b;
+  color: #ffffff;
+}
+
+.write-category-btn:hover {
+  opacity: 0.9;
+}
+
+/* 하단 버튼 */
+.write-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 375px;
+  background-color: #ffffff;
+  padding: 8px 20px;
+  padding-bottom: 34px;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.write-submit-btn {
+  width: 100%;
+  max-width: 335px;
+  height: 52px;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.45px;
+  transition: background-color 0.2s, opacity 0.2s;
+  margin: 0 auto;
+  display: block;
+  background-color: #d0d0d0;
+  cursor: not-allowed;
+}
+
+/* 활성화 상태 (모든 조건 만족) */
+.write-submit-btn-active {
+  background-color: #ff6f0f;
+  cursor: pointer;
+}
+
+.write-submit-btn-active:hover {
+  opacity: 0.9;
+}
+
+.write-submit-btn-active:active {
+  opacity: 0.8;
+}
+
+/* 비활성화 상태 (부분적으로 채워짐) */
+.write-submit-btn-inactive {
+  background-color: #d0d0d0;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.write-submit-btn-inactive:hover {
+  opacity: 1;
+}
+
+.write-submit-btn-inactive:active {
+  opacity: 1;
+}
+
+/* 에러 메시지 */
+.write-error-message {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  margin-top: 4px;
+  padding: 0 4px;
+}
+
+.write-error-message-images {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.write-error-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.write-error-text {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #fc5555;
+  letter-spacing: -0.35px;
+  margin: 0;
+}
+
+/* 입력 필드 에러 상태 */
+.write-input-field-error {
+  border-color: #fc5555 !important;
+  background-color: #fff5f4 !important;
+}
+
+.write-textarea-field-error {
+  border-color: #fc5555 !important;
+  background-color: #fff5f4 !important;
+}
+
+/* 반응형 */
+@media (max-width: 415px) {
+  .mobile-container {
+    padding: 0;
+  }
+  
+  .write-post-screen {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .write-nav-bar {
+    width: 100vw;
+  }
+
+  .write-content {
+    width: 100vw;
+  }
+
+  .write-footer {
+    width: 100vw;
+  }
+}

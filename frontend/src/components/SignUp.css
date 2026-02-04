@@ -1,0 +1,348 @@
+/* 모바일 컨테이너 - PC에서도 가운데에 딱 뜨게 */
+.mobile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 모바일 화면 (375px 고정) */
+.signup-screen {
+  width: 375px;
+  height: 812px;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+}
+
+/* 상태바 - Onboarding과 동일 */
+.status-bar {
+  width: 375px;
+  height: 44px;
+  position: relative;
+  background-color: #2b2b2b;
+}
+
+.status-bar-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.status-time {
+  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: -0.5px;
+  position: absolute;
+  left: 45px;
+  top: 12px;
+  width: 54px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  transform: translateX(-50%);
+  white-space: pre-wrap;
+}
+
+.status-icons {
+  position: absolute;
+  right: 17.67px;
+  top: 16.33px;
+  width: 66.66px;
+  height: 11.336px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.status-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: fill;
+  max-width: none;
+  image-rendering: auto;
+}
+
+/* 네비게이션 바 */
+.nav-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 375px;
+  height: 44px;
+  background-color: #ffffff;
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  padding-left: 16px;
+  width: 104px;
+  justify-content: flex-start;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.close-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.nav-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  width: 103px;
+}
+
+.nav-title h1 {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #212224;
+  letter-spacing: -0.45px;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.nav-right {
+  width: 104px;
+  height: 44px;
+}
+
+/* 입력 폼 */
+.signup-form {
+  position: absolute;
+  top: 64px;
+  left: 16px;
+  width: 343px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.input-label {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #898989;
+  letter-spacing: -0.4px;
+  margin: 0;
+}
+
+.input-field {
+  width: 343px;
+  height: 54px;
+  background-color: #f7f8f9;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 15px 18px;
+  gap: 10px;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.input-field.password-field {
+  gap: 10px;
+}
+
+.input-field-error {
+  border: 1px solid #fc5555;
+  background-color: #fff5f4;
+}
+
+.input-text {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #212224;
+  letter-spacing: -0.4px;
+  border: none;
+  background: transparent;
+  outline: none;
+  flex: 1;
+  padding: 0;
+  margin: 0;
+}
+
+.input-text::placeholder {
+  color: #d0d0d0;
+}
+
+.eye-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.eye-icon {
+  width: 17.298px;
+  height: 12px;
+  display: block;
+}
+
+.input-placeholder {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #d0d0d0;
+  letter-spacing: -0.4px;
+  margin: 0;
+  flex: 1;
+}
+
+.input-hint {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #898989;
+  letter-spacing: -0.35px;
+  margin: 0;
+  height: 22px;
+}
+
+/* 에러 메시지 */
+.error-message {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  width: 100%;
+  margin-top: 0;
+}
+
+.error-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.error-text {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #fc5555;
+  letter-spacing: -0.35px;
+  margin: 0;
+}
+
+/* 하단 버튼 */
+.signup-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  padding-top: 8px;
+  padding-bottom: 34px; /* 제거된 인디케이터 높이만큼 추가 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
+  padding-bottom: 4px;
+}
+
+.btn-signup {
+  width: 335px;
+  height: 52px;
+  background-color: #ff6f0f;
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-signup:hover {
+  opacity: 0.9;
+}
+
+.btn-signup:active {
+  opacity: 0.8;
+}
+
+.btn-signup span {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #ffffff;
+  letter-spacing: -0.45px;
+}
+
+
+/* 반응형 */
+@media (max-width: 415px) {
+  .mobile-container {
+    padding: 0;
+  }
+  
+  .signup-screen {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
