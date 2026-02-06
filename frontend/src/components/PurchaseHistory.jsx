@@ -48,7 +48,7 @@ function PurchaseHistory({ onClose, onItemClick }) {
   return (
     <div className="mobile-container">
       <div className="purchase-history-screen">
-        {/* 상태바 제거: 네비 top: 0 (Figma 1383-47402) */}
+        <div className="purchase-history-status-bar" aria-hidden="true" />
         <header className="purchase-history-nav">
           <button type="button" className="purchase-history-back" onClick={onClose} aria-label="뒤로">
             <BackIcon />

@@ -50,6 +50,7 @@ function ProfileDetail({ onClose, onNavigate }) {
   return (
     <div className="mobile-container">
       <div className="profile-detail-screen">
+        <div className="profile-detail-status-bar" aria-hidden="true" />
         <header className="profile-detail-nav">
           <button type="button" className="profile-detail-back" onClick={onClose} aria-label="뒤로">
             <BackIcon />

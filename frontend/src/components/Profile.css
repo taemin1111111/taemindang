@@ -1,4 +1,4 @@
-/* 홈(.home-screen)과 동일: 상태바 제거, 하단바 위치/밑 여백 통일 */
+/* 홈(.home-screen)과 동일: 하단바 위치/밑 여백 통일 */
 .profile-screen {
   width: 375px;
   height: 812px;
@@ -9,9 +9,19 @@
   border-radius: 0;
 }
 
-.profile-header {
+/* 상단 44px 상태바 공간 */
+.profile-status-bar {
   position: absolute;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.profile-header {
+  position: absolute;
+  top: 44px;
   left: 0;
   right: 0;
   height: 44px;
@@ -33,10 +43,10 @@
   letter-spacing: -0.5px;
 }
 
-/* 홈 .product-list처럼 절대 위치: 상단(44) ~ 하단 네비(90) 사이, 스크롤 */
+/* 상단(상태바44+헤더44) ~ 하단 네비(90) 사이, 스크롤 */
 .profile-content {
   position: absolute;
-  top: 44px;
+  top: 88px; /* 상태바(44) + 헤더(44) */
   left: 0;
   right: 0;
   bottom: 90px; /* 하단 네비 높이(6+50+34)와 동일 */

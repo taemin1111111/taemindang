@@ -176,7 +176,9 @@ function ChatAppointment({ chatId, appointmentId, onClose }) {
   return (
     <div className="chat-appointment-container">
       <div className="chat-appointment-screen">
-        {/* 네비게이션 바 - top: 0, 상태바 제거 */}
+        {/* 상단 44px 상태바 공간 */}
+        <div className="chat-appointment-status-bar" aria-hidden="true" />
+        {/* 네비게이션 바 */}
         <div className="chat-appointment-nav">
           <button type="button" className="chat-appointment-close" onClick={onClose} aria-label="닫기">
             <CloseIcon />
@@ -196,7 +198,7 @@ function ChatAppointment({ chatId, appointmentId, onClose }) {
               </p>
             ) : (
             <>
-            <div className="chat-appointment-form">
+            <div className={`chat-appointment-form ${viewMode && appointmentStatus === 'CONFIRMED' ? 'chat-appointment-form-confirmed' : ''}`}>
               <div className="chat-appointment-row">
                 <label className="chat-appointment-label">날짜</label>
                 <div

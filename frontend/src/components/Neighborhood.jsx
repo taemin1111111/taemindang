@@ -92,6 +92,7 @@ function Neighborhood({ onClose, onConfirm }) {
   return (
     <div className="mobile-container">
       <div className="neighborhood-screen">
+        <div className="neighborhood-status-bar" aria-hidden="true" />
         {/* 네비게이션 바 */}
         <div className="nav-bar">
           <div className="nav-content">

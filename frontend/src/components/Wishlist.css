@@ -1,4 +1,3 @@
-/* 상태바 제거: 네비 top: 0 / Indicator 제거, padding-bottom: 34px 유지 (Figma 1383-46696) */
 .wishlist-screen {
   width: 375px;
   height: 812px;
@@ -12,9 +11,18 @@
   box-sizing: border-box;
 }
 
-.wishlist-nav {
+.wishlist-status-bar {
   position: absolute;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.wishlist-nav {
+  position: absolute;
+  top: 44px;
   left: 0;
   right: 0;
   height: 44px;
@@ -60,7 +68,7 @@
 
 .wishlist-content {
   flex: 1;
-  padding-top: 44px;
+  padding-top: 88px;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none;

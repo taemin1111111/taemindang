@@ -20,6 +20,16 @@
   border-radius: 0;
 }
 
+/* 상단 44px 상태바 공간 (나머지 콘텐츠는 top으로 44px 아래에 배치) */
+.signup-status-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  flex-shrink: 0;
+}
+
 /* 상태바 - Onboarding과 동일 */
 .status-bar {
   width: 375px;
@@ -73,10 +83,10 @@
   image-rendering: auto;
 }
 
-/* 네비게이션 바 */
-.nav-bar {
+/* 네비게이션 바 (상태바 44px 아래) - SignUp 전용 선택자로 Login.css 덮어쓰기 방지 */
+.signup-screen .nav-bar {
   position: absolute;
-  top: 0;
+  top: 44px;
   left: 0;
   width: 375px;
   height: 44px;
@@ -150,10 +160,10 @@
   height: 44px;
 }
 
-/* 입력 폼 */
+/* 입력 폼 (상태바 44px + 네비 44px + 간격 20px 아래) */
 .signup-form {
   position: absolute;
-  top: 64px;
+  top: 108px;
   left: 16px;
   width: 343px;
   display: flex;

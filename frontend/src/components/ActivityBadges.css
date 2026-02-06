@@ -12,9 +12,18 @@
   box-sizing: border-box;
 }
 
-.activity-badges-nav {
+.activity-badges-status-bar {
   position: absolute;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.activity-badges-nav {
+  position: absolute;
+  top: 44px;
   left: 0;
   right: 0;
   height: 44px;
@@ -58,10 +67,10 @@
   width: 24px;
 }
 
-/* 본문: 상단 44px(헤더) + 좌우 16px, 배지 영역은 30px 띄움 (사진 수치) */
+/* 본문: 상단 88px(상태바+헤더) + 좌우 30px, 배지 영역은 30px 띄움 */
 .activity-badges-body {
   flex: 1;
-  padding: 44px 30px 16px 30px;
+  padding: 88px 30px 16px 30px;
   overflow-y: auto;
   box-sizing: border-box;
 }

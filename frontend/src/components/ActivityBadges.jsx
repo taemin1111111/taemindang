@@ -38,6 +38,7 @@ function ActivityBadges({ onClose }) {
   return (
     <div className="mobile-container">
       <div className="activity-badges-screen">
+        <div className="activity-badges-status-bar" aria-hidden="true" />
         <header className="activity-badges-nav">
           <button type="button" className="activity-badges-close" onClick={onClose} aria-label="닫기">
             <CloseIcon />

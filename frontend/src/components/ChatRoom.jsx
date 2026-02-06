@@ -304,7 +304,9 @@ function ChatRoom({ chatId, onClose, onNavigateToAppointment }) {
 
   return (
     <div className="mobile-container">
-      <div className="chat-room-screen">
+      <div className={`chat-room-screen ${item ? 'chat-room-screen--with-item' : ''}`}>
+        {/* 상단 44px 상태바 공간 */}
+        <div className="chat-room-status-bar" aria-hidden="true" />
         {/* 네비게이션 바 */}
         <div className="chat-room-nav-bar">
           <div className="chat-room-nav-content">
@@ -399,33 +401,35 @@ function ChatRoom({ chatId, onClose, onNavigateToAppointment }) {
                       </div>
                     )}
                     <div className="chat-room-message-content-wrapper">
-                      {message.msg_type === 'APPOINTMENT' ? (
-                        <div className={`chat-room-appointment-card ${message.is_mine ? 'chat-room-appointment-card-mine' : ''}`}>
-                          <p className="chat-room-appointment-card-title">{message.message}</p>
-                          {message.meet_date && (
-                            <p className="chat-room-appointment-card-detail">날짜 : {formatAppointmentDate(message.meet_date)}</p>
-                          )}
-                          {message.meet_time != null && message.meet_time !== '' && (
-                            <p className="chat-room-appointment-card-detail">시간 : {formatAppointmentTime(message.meet_time)}</p>
-                          )}
-                          <button type="button" className="chat-room-appointment-card-btn" onClick={() => onNavigateToAppointment?.(message.appointment_id)}>
-                            약속 보기
-                          </button>
-                        </div>
-                      ) : (
-                      <>
-                        {message.message != null && message.message !== '' && (
-                          <div className={`chat-room-message-bubble ${message.is_mine ? 'chat-room-message-bubble-mine' : ''}`}>
-                            {message.message}
+                      <div className="chat-room-message-body">
+                        {message.msg_type === 'APPOINTMENT' ? (
+                          <div className={`chat-room-appointment-card ${message.is_mine ? 'chat-room-appointment-card-mine' : ''}`}>
+                            <p className="chat-room-appointment-card-title">{message.message}</p>
+                            {message.meet_date && (
+                              <p className="chat-room-appointment-card-detail">날짜 : {formatAppointmentDate(message.meet_date)}</p>
+                            )}
+                            {message.meet_time != null && message.meet_time !== '' && (
+                              <p className="chat-room-appointment-card-detail">시간 : {formatAppointmentTime(message.meet_time)}</p>
+                            )}
+                            <button type="button" className="chat-room-appointment-card-btn" onClick={() => onNavigateToAppointment?.(message.appointment_id)}>
+                              약속 보기
+                            </button>
                           </div>
+                        ) : (
+                          <>
+                            {message.message != null && message.message !== '' && (
+                              <div className={`chat-room-message-bubble ${message.is_mine ? 'chat-room-message-bubble-mine' : ''}`}>
+                                {message.message}
+                              </div>
+                            )}
+                            {message.image_url && (
+                              <div className={`chat-room-message-bubble chat-room-message-image-wrap ${message.is_mine ? 'chat-room-message-bubble-mine' : ''}`}>
+                                <img src={message.image_url} alt="전송된 사진" className="chat-room-message-image" />
+                              </div>
+                            )}
+                          </>
                         )}
-                        {message.image_url && (
-                          <div className={`chat-room-message-bubble chat-room-message-image-wrap ${message.is_mine ? 'chat-room-message-bubble-mine' : ''}`}>
-                            <img src={message.image_url} alt="전송된 사진" className="chat-room-message-image" />
-                          </div>
-                        )}
-                      </>
-                    )}
+                      </div>
                       <span className={`chat-room-message-time ${message.is_mine ? 'chat-room-message-time-mine' : ''}`}>
                         {formatTime(message.created_at)}
                       </span>

@@ -12,20 +12,30 @@
 .chat-appointment-screen {
   width: 375px;
   height: 812px;
+  box-sizing: border-box;
+  padding-bottom: 34px;
   background-color: #ffffff;
   position: relative;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  padding-bottom: 34px;
-  box-sizing: border-box;
 }
 
-/* 네비게이션 바 - top: 0 (상태바 없음) */
-.chat-appointment-nav {
+/* 상단 44px 상태바 공간 */
+.chat-appointment-status-bar {
   position: absolute;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+/* 네비게이션 바 (상태바 44px 아래) */
+.chat-appointment-nav {
+  position: absolute;
+  top: 44px;
   left: 0;
   right: 0;
   height: 44px;
@@ -68,15 +78,20 @@
   width: 24px;
 }
 
+/* 콘텐츠: 상태바 44 + 네비 44 아래, 완료 버튼은 하단에서 34px 위 */
 .chat-appointment-content {
-  flex: 1;
-  padding-top: 44px;
+  position: absolute;
+  top: 88px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   padding-left: 20px;
   padding-right: 20px;
-  padding-bottom: 24px;
+  padding-bottom: 34px; /* 하단 인디케이터 공간만큼 완료 버튼 위로 */
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .chat-appointment-loading {
@@ -113,6 +128,48 @@
 
 .chat-appointment-form {
   flex: 1;
+}
+
+/* 확정된 약속(버튼 없음): 날짜/시간 옆 버튼이 사라져서 생기는 빈공간 제거, 값만 오른쪽 끝까지 쭉 */
+.chat-appointment-form-confirmed .chat-appointment-row {
+  justify-content: space-between;
+}
+
+.chat-appointment-form-confirmed .chat-appointment-field-wrap {
+  justify-content: flex-end;
+  flex: 1;
+  min-width: 0;
+  padding-right: 0;
+}
+
+.chat-appointment-form-confirmed .chat-appointment-date-wrap,
+.chat-appointment-form-confirmed .chat-appointment-time-wrap {
+  padding-right: 0;
+}
+
+.chat-appointment-form-confirmed .chat-appointment-field-display {
+  position: static;
+  right: auto;
+  left: auto;
+  width: 100%;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+.chat-appointment-form-confirmed .chat-appointment-date-wrap .chat-appointment-chevron,
+.chat-appointment-form-confirmed .chat-appointment-time-wrap .chat-appointment-chevron {
+  display: none;
+}
+
+.chat-appointment-form-confirmed .chat-appointment-time-btn {
+  padding-right: 0;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: right;
+}
+
+.chat-appointment-form-confirmed .chat-appointment-location-input {
+  text-align: right;
 }
 
 .chat-appointment-row {

@@ -22,10 +22,20 @@
   box-sizing: border-box;
 }
 
-/* 네비게이션 바 - top: 0으로 배치 (상태바 제거) */
-.search-nav-bar {
+/* 상단 44px 상태바 공간 */
+.search-status-bar {
   position: absolute;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+/* 네비게이션 바 (상태바 44px 아래) */
+.search-nav-bar {
+  position: absolute;
+  top: 44px;
   left: 0;
   width: 375px;
   height: 56px; /* 44px + 12px 여백 */
@@ -196,10 +206,10 @@
   white-space: nowrap;
 }
 
-/* 연관 검색어 영역 */
+/* 연관 검색어 영역 (상태바 44 + 네비 56 + 간격 20) */
 .search-suggestions-section {
   position: absolute;
-  top: 76px; /* 네비게이션 바(56px) + 검색창과 자동완성 간격 20px */
+  top: 120px; /* 상태바(44) + 네비(56) + 간격 20px */
   left: 16px;
   width: 344px;
   display: flex;

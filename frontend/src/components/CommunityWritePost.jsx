@@ -105,6 +105,7 @@ function CommunityWritePost({ onClose, onSuccess }) {
   return (
     <div className="mobile-container">
       <div className="community-write-screen">
+        <div className="community-write-status-bar" aria-hidden="true" />
         {/* 네비게이션 바 */}
         <div className="community-write-nav-bar">
           <div className="community-write-nav-content">

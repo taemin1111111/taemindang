@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import './Home.css';
 import api from '../utils/axios.js';
+import { getItemsFromCache, setItemsCache } from '../utils/itemsCache.js';
 
 // Figma 이미지 URL
 const imgIconSearch = "https://www.figma.com/api/mcp/asset/26bbd05b-92fc-44eb-84c3-f18c6c78bcd3";
@@ -14,7 +15,7 @@ const imgComponent592 = "https://www.figma.com/api/mcp/asset/43b1bb59-9ac5-4ab2-
 const imgFavorite = "https://www.figma.com/api/mcp/asset/e4e4c007-575f-41a5-84a9-37121e1366a4";
 const imgFavoriteIcon = "https://www.figma.com/api/mcp/asset/ef975df3-be81-4998-b3eb-aefab1bab9b1";
 
-function Home({ onWritePost, onItemClick, onNavigate, onSearch, currentScreen = 'home' }) {
+function Home({ onWritePost, onItemClick, onNavigate, onSearch, currentScreen = 'home', embedded = false }) {
   const [selectedFilter, setSelectedFilter] = useState('전체');
   const [neighborhood, setNeighborhood] = useState('선택한주소');
   const [items, setItems] = useState([]);
@@ -39,15 +40,22 @@ function Home({ onWritePost, onItemClick, onNavigate, onSearch, currentScreen = 
     fetchUserInfo();
   }, []);
 
-  // 상품 리스트 가져오기
+  // 상품 리스트 가져오기 (캐시 있으면 재요청 생략, 2분 TTL)
   const fetchItems = async (category = null) => {
+    const cached = getItemsFromCache(category);
+    if (cached !== null) {
+      setItems(cached);
+      setLoading(false);
+      return;
+    }
     try {
       setLoading(true);
       const params = category && category !== '전체' ? { category } : {};
       const response = await api.get('/items', { params });
-      
       if (response.data.success) {
-        setItems(response.data.data || []);
+        const data = response.data.data || [];
+        setItems(data);
+        setItemsCache(category, data);
       }
     } catch (error) {
       console.error('상품 리스트 가져오기 오류:', error);
@@ -112,9 +120,10 @@ function Home({ onWritePost, onItemClick, onNavigate, onSearch, currentScreen = 
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
   };
-  return (
-    <div className="mobile-container">
-      <div className="home-screen">
+  const screen = (
+    <div className="home-screen">
+        {/* 상단 44px 상태바 공간 */}
+        <div className="home-status-bar" aria-hidden="true" />
         {/* 네비게이션 바 */}
         <div className="nav-bar">
           <div className="nav-content">
@@ -199,36 +208,15 @@ function Home({ onWritePost, onItemClick, onNavigate, onSearch, currentScreen = 
           )}
         </div>
 
-        {/* 하단 네비게이션 바 */}
-        <div className="bottom-nav">
-          <div className="bottom-nav-content">
-            <div className={`bottom-nav-item ${currentScreen === 'home' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('home')}>
-              <img alt="home" src={imgHome} className="bottom-nav-icon" />
-              <span>홈</span>
-            </div>
-            <div className={`bottom-nav-item ${currentScreen === 'community' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('community')}>
-              <img alt="calendar" src={imgCalendar} className="bottom-nav-icon" />
-              <span>동네생활</span>
-            </div>
-            <div className={`bottom-nav-item ${currentScreen === 'chat' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('chat')}>
-              <img alt="chat" src={imgChat} className="bottom-nav-icon" />
-              <span>채팅</span>
-            </div>
-            <div className={`bottom-nav-item ${currentScreen === 'profile' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('profile')}>
-              <img alt="user" src={imgUser} className="bottom-nav-icon" />
-              <span>나의당근</span>
-            </div>
-          </div>
-        </div>
-
         {/* 글쓰기 플로팅 버튼 */}
         <button className="write-btn" onClick={onWritePost}>
           <img alt="plus" src={imgPlus} className="write-icon" />
           <span>글쓰기</span>
         </button>
       </div>
-    </div>
   );
+  if (embedded) return screen;
+  return <div className="mobile-container">{screen}</div>;
 }
 
 export default Home;

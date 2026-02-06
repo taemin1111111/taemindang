@@ -99,6 +99,8 @@ function Login({ onClose, onLoginSuccess }) {
   return (
     <div className="mobile-container">
       <div className="login-screen">
+        {/* 상단 44px 상태바 공간 (812 중 44 예약) */}
+        <div className="login-status-bar" aria-hidden="true" />
         {/* 네비게이션 바 */}
         <div className="nav-bar">
           <div className="nav-content">

@@ -37,7 +37,7 @@ function MyCommunityActivity({ onClose, onPostClick, onWriteCommunityPost, onBro
   return (
     <div className="mobile-container">
       <div className="my-community-activity-screen">
-        {/* 상태바 제거: 네비 top: 0 (Figma 1383-47881) */}
+        <div className="my-community-activity-status-bar" aria-hidden="true" />
         <header className="my-community-activity-nav">
           <button type="button" className="my-community-activity-back" onClick={onClose} aria-label="뒤로">
             <BackIcon />

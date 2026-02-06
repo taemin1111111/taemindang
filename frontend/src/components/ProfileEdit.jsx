@@ -103,6 +103,7 @@ function ProfileEdit({ onClose }) {
   return (
     <div className="mobile-container">
       <div className="profile-edit-screen">
+        <div className="profile-edit-status-bar" aria-hidden="true" />
         <header className="profile-edit-nav">
           <button type="button" className="profile-edit-close" onClick={onClose} aria-label="닫기">
             <CloseIcon />

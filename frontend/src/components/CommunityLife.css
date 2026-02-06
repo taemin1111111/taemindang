@@ -20,11 +20,20 @@
   border-radius: 0;
 }
 
-
-/* 네비게이션 바 */
-.nav-bar {
+/* 상단 44px 상태바 공간 */
+.community-life-status-bar {
   position: absolute;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+/* 네비게이션 바 (상태바 44px 아래) */
+.community-life-screen .nav-bar {
+  position: absolute;
+  top: 44px;
   left: 0;
   width: 375px;
   height: 44px;
@@ -94,10 +103,10 @@
   display: block;
 }
 
-/* 필터 섹션 */
-.filter-section {
+/* 필터 섹션 (상태바 44 + 네비 44 아래) */
+.community-life-screen .filter-section {
   position: absolute;
-  top: 44px;
+  top: 88px;
   left: 0;
   width: 375px;
   padding: 10px 16px;
@@ -174,10 +183,10 @@
   opacity: 0.9;
 }
 
-/* 게시글 리스트 */
-.post-list {
+/* 게시글 리스트 (상태바 44 + 네비 44 + 필터 ~44 아래), 높이 44px 줄임 */
+.community-life-screen .post-list {
   position: absolute;
-  top: 88px;
+  top: 132px; /* 상태바(44) + nav(44) + filter(44) */
   left: 0;
   right: 0;
   width: 375px;
@@ -187,7 +196,7 @@
   padding-top: 16px;
   padding-bottom: 120px;
   overflow-y: auto;
-  max-height: calc(812px - 88px - 70px - 34px);
+  max-height: calc(812px - 132px - 70px - 34px);
   box-sizing: border-box;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */

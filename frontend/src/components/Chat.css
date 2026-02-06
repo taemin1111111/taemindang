@@ -22,10 +22,20 @@
   box-sizing: border-box;
 }
 
-/* 네비게이션 바 - top: 0으로 배치 (상태바 제거) */
-.chat-nav-bar {
+/* 상단 44px 상태바 공간 */
+.chat-status-bar {
   position: absolute;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+/* 네비게이션 바 (상태바 44px 아래) */
+.chat-nav-bar {
+  position: absolute;
+  top: 44px;
   left: 0;
   width: 375px;
   height: 44px;
@@ -69,10 +79,10 @@
   opacity: 0; /* 현재는 숨김 */
 }
 
-/* 필터 버튼들 */
+/* 필터 버튼들 (상태바 44 + 네비 44 아래) */
 .chat-filters {
   position: absolute;
-  top: 44px;
+  top: 88px;
   left: 0;
   width: 375px;
   padding: 10px 16px;
@@ -113,13 +123,13 @@
   border-color: #424242;
 }
 
-/* 스크롤 가능한 콘텐츠 영역 */
+/* 스크롤 가능한 콘텐츠 영역 (상태바 44 + 네비 44 + 필터 58 아래), 높이 44px 줄임 */
 .chat-content {
   position: absolute;
-  top: 102px; /* 네비게이션(44px) + 필터(58px) */
+  top: 146px; /* 상태바(44) + 네비(44) + 필터(58) */
   left: 0;
   width: 375px;
-  height: calc(812px - 102px - 80px); /* 전체 높이 - 상단 - 하단 네비게이션 */
+  height: calc(812px - 146px - 80px); /* 전체 - 상단 - 하단 네비 */
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none; /* Firefox */

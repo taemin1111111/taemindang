@@ -114,7 +114,9 @@ function Search({ onClose, onNavigate }) {
   return (
     <div className="mobile-container">
       <div className="search-screen">
-        {/* 네비게이션 바 - top: 0으로 배치 (상태바 제거) */}
+        {/* 상단 44px 상태바 공간 */}
+        <div className="search-status-bar" aria-hidden="true" />
+        {/* 네비게이션 바 */}
         <div className="search-nav-bar">
           <div className="search-nav-content">
             <div className="search-nav-left">

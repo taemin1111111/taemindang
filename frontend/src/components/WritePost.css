@@ -20,10 +20,19 @@
   border-radius: 0;
 }
 
-/* 네비게이션 바 */
-.write-nav-bar {
+.write-post-status-bar {
   position: absolute;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+/* 네비게이션 바 (상태바 44px 아래) */
+.write-nav-bar {
+  position: absolute;
+  top: 44px;
   left: 0;
   width: 375px;
   height: 44px;
@@ -99,17 +108,17 @@
   width: 104px;
 }
 
-/* 메인 콘텐츠 */
+/* 메인 콘텐츠 (상태바 44 + 네비 44 아래), 작성완료 버튼은 하단 고정 */
 .write-content {
   position: absolute;
-  top: 44px;
+  top: 88px;
   left: 0;
   right: 0;
   width: 375px;
   padding: 30px 16px;
   padding-bottom: 120px;
   overflow-y: auto;
-  max-height: calc(812px - 44px - 100px);
+  max-height: calc(812px - 88px - 100px);
   box-sizing: border-box;
   scrollbar-width: none;
   -ms-overflow-style: none;

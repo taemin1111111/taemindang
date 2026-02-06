@@ -20,7 +20,7 @@ const imgIconStroke1 = "https://www.figma.com/api/mcp/asset/c72bd319-9438-4690-a
 const imgVector332 = "https://www.figma.com/api/mcp/asset/40e5a679-0fb7-4a2c-a391-a4251b57b09a";
 const imgHomeIcon = "https://www.figma.com/api/mcp/asset/71d4198b-76c2-4231-bb31-aa91c6b2feb5";
 
-function CommunityLife({ onNavigate, onWritePost, onSearch, currentScreen = 'community' }) {
+function CommunityLife({ onNavigate, onWritePost, onSearch, currentScreen = 'community', embedded = false }) {
   const [selectedFilter, setSelectedFilter] = useState('추천');
   const [neighborhood, setNeighborhood] = useState('선택한주소');
   const [posts, setPosts] = useState([]);
@@ -178,9 +178,10 @@ function CommunityLife({ onNavigate, onWritePost, onSearch, currentScreen = 'com
     fetchPosts();
   }, [selectedFilter, neighborhood]);
 
-  return (
-    <div className="mobile-container">
-      <div className="community-life-screen">
+  const screen = (
+    <div className="community-life-screen">
+        {/* 상단 44px 상태바 공간 */}
+        <div className="community-life-status-bar" aria-hidden="true" />
         {/* 네비게이션 바 */}
         <div className="nav-bar">
           <div className="nav-content">
@@ -328,36 +329,15 @@ function CommunityLife({ onNavigate, onWritePost, onSearch, currentScreen = 'com
           )}
         </div>
 
-        {/* 하단 네비게이션 바 */}
-        <div className="bottom-nav">
-          <div className="bottom-nav-content">
-            <div className={`bottom-nav-item ${currentScreen === 'home' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('home')}>
-              <img alt="home" src={imgHome} className="bottom-nav-icon" />
-              <span>홈</span>
-            </div>
-            <div className={`bottom-nav-item ${currentScreen === 'community' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('community')}>
-              <img alt="calendar" src={imgCalendar} className="bottom-nav-icon" />
-              <span>동네생활</span>
-            </div>
-            <div className={`bottom-nav-item ${currentScreen === 'chat' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('chat')}>
-              <img alt="chat" src={imgChat} className="bottom-nav-icon" />
-              <span>채팅</span>
-            </div>
-            <div className={`bottom-nav-item ${currentScreen === 'profile' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('profile')}>
-              <img alt="user" src={imgUser} className="bottom-nav-icon" />
-              <span>나의당근</span>
-            </div>
-          </div>
-        </div>
-
         {/* 글쓰기 플로팅 버튼 */}
         <button className="write-btn" onClick={onWritePost}>
           <img alt="plus" src={imgPlus} className="write-icon" />
           <span>글쓰기</span>
         </button>
       </div>
-    </div>
   );
+  if (embedded) return screen;
+  return <div className="mobile-container">{screen}</div>;
 }
 
 export default CommunityLife;

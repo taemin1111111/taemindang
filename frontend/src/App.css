@@ -2,3 +2,19 @@
   width: 100%;
   min-height: 100vh;
 }
+
+/* 메인 탭(홈/동네생활/채팅/나의당근) 공통 프레임 - 하단 네비 한 번만 렌더링해 깜빡임 방지 */
+.main-tabs-frame {
+  position: relative;
+  width: 375px;
+  height: 812px;
+  overflow: hidden;
+}
+
+.main-tabs-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

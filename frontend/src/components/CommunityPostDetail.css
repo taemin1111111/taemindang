@@ -24,14 +24,24 @@
   padding-bottom: 34px; /* Indicator 공간 유지 */
 }
 
+/* 상단 44px 상태바 공간 */
+.community-post-detail-status-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  flex-shrink: 0;
+}
+
 .community-post-detail-screen::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
 
-/* 네비게이션 바 - top: 0으로 배치 (상태바 제거) */
+/* 네비게이션 바 (상태바 44px 아래) */
 .community-post-detail-nav-bar {
   position: absolute;
-  top: 0;
+  top: 44px;
   left: 0;
   width: 375px;
   height: 44px;
@@ -94,15 +104,15 @@
   color: #212224;
 }
 
-/* 게시글 메인 영역 */
+/* 게시글 메인 영역 (상태바 44 + 네비 44 아래), 댓글 입력바는 하단 고정 */
 .community-post-detail-main {
   position: absolute;
-  top: 44px;
+  top: 88px; /* 상태바(44) + 네비(44) */
   left: 0;
   width: 375px;
   display: flex;
   flex-direction: column;
-  min-height: calc(100% - 44px - 50px - 34px); /* 전체 높이 - 네비 - 입력바 - indicator 공간 */
+  min-height: calc(100% - 88px - 50px - 34px); /* 전체 - 상단 - 입력바 - indicator */
 }
 
 /* 게시글 내용 */

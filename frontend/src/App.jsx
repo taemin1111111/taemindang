@@ -23,6 +23,8 @@ import SalesHistory from './components/SalesHistory'
 import PurchaseHistory from './components/PurchaseHistory'
 import MyCommunityActivity from './components/MyCommunityActivity'
 import Wishlist from './components/Wishlist'
+import BottomNav from './components/BottomNav'
+import { invalidateItemsCache } from './utils/itemsCache.js'
 import './App.css'
 
 function App() {
@@ -99,12 +101,16 @@ function App() {
   }
 
   const handleWritePostSuccess = (itemId) => {
+    invalidateItemsCache()
     setSelectedItemId(itemId)
     setCurrentScreen('itemDetail')
   }
 
   const handleItemClick = (itemId) => {
-    setPreviousScreen(currentScreen)
+    /* 상품 디테일 안에서 "다른 판매 물품" 클릭 시에는 previousScreen 유지 → 뒤로가기 시 홈 등으로 정상 복귀 */
+    if (currentScreen !== 'itemDetail') {
+      setPreviousScreen(currentScreen)
+    }
     setSelectedItemId(itemId)
     setCurrentScreen('itemDetail')
   }
@@ -166,22 +172,39 @@ function App() {
       {currentScreen === 'neighborhood' && (
         <Neighborhood onClose={handleCloseNeighborhood} onConfirm={handleNeighborhoodConfirm} />
       )}
-      {currentScreen === 'home' && (
-        <Home 
-          onWritePost={handleWritePost} 
-          onItemClick={handleItemClick}
-          onNavigate={handleNavigate}
-          onSearch={handleSearchClick}
-          currentScreen={currentScreen}
-        />
-      )}
-      {currentScreen === 'community' && (
-        <CommunityLife 
-          onNavigate={handleNavigate}
-          onWritePost={handleWritePost}
-          onSearch={handleSearchClick}
-          currentScreen={currentScreen}
-        />
+      {(currentScreen === 'home' || currentScreen === 'community' || currentScreen === 'chat' || currentScreen === 'profile') && (
+        <div className="mobile-container">
+          <div className="main-tabs-frame">
+            <div className="main-tabs-content">
+              {currentScreen === 'home' && (
+                <Home
+                  embedded
+                  onWritePost={handleWritePost}
+                  onItemClick={handleItemClick}
+                  onNavigate={handleNavigate}
+                  onSearch={handleSearchClick}
+                  currentScreen={currentScreen}
+                />
+              )}
+              {currentScreen === 'community' && (
+                <CommunityLife
+                  embedded
+                  onNavigate={handleNavigate}
+                  onWritePost={handleWritePost}
+                  onSearch={handleSearchClick}
+                  currentScreen={currentScreen}
+                />
+              )}
+              {currentScreen === 'chat' && (
+                <Chat embedded onNavigate={handleNavigate} />
+              )}
+              {currentScreen === 'profile' && (
+                <Profile embedded onNavigate={handleNavigate} currentScreen={currentScreen} />
+              )}
+            </div>
+            <BottomNav currentScreen={currentScreen} onNavigate={handleNavigate} />
+          </div>
+        </div>
       )}
       {currentScreen === 'write' && (
         <WritePost onClose={handleCloseWritePost} onSuccess={handleWritePostSuccess} />
@@ -228,9 +251,6 @@ function App() {
           onNavigate={handleNavigate}
         />
       )}
-      {currentScreen === 'profile' && (
-        <Profile onNavigate={handleNavigate} currentScreen={currentScreen} />
-      )}
       {currentScreen === 'profileDetail' && (
         <ProfileDetail
           onClose={() => setCurrentScreen('profile')}
@@ -276,9 +296,6 @@ function App() {
           }}
           onBrowseCommunity={() => setCurrentScreen('community')}
         />
-      )}
-      {currentScreen === 'chat' && (
-        <Chat onNavigate={handleNavigate} />
       )}
       {currentScreen === 'chatRoom' && selectedChatId && (
         <ChatRoom 

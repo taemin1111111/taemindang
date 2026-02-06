@@ -232,6 +232,7 @@ function WritePost({ onClose, onSuccess }) {
   return (
     <div className="mobile-container">
       <div className="write-post-screen">
+        <div className="write-post-status-bar" aria-hidden="true" />
         {/* 네비게이션 바 */}
         <div className="write-nav-bar">
           <div className="write-nav-content">

@@ -52,7 +52,7 @@ function Wishlist({ onClose, onItemClick }) {
   return (
     <div className="mobile-container">
       <div className="wishlist-screen">
-        {/* 상태바 제거: 네비 top: 0 (Figma 1383-46696) */}
+        <div className="wishlist-status-bar" aria-hidden="true" />
         <header className="wishlist-nav">
           <button type="button" className="wishlist-back" onClick={onClose} aria-label="뒤로">
             <BackIcon />

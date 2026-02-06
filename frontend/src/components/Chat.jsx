@@ -11,7 +11,7 @@ const imgCalendar = 'https://www.figma.com/api/mcp/asset/cd973a00-ef54-460c-bb86
 const imgChat = 'https://www.figma.com/api/mcp/asset/de5e9a0c-ff36-4704-b04c-931d926cf31c';
 const imgUser = 'https://www.figma.com/api/mcp/asset/4416fe6a-fe9f-4b58-ad21-e1c740c18f45';
 
-function Chat({ onNavigate }) {
+function Chat({ onNavigate, embedded = false }) {
   const [selectedFilter, setSelectedFilter] = useState('전체');
   const [chats, setChats] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -81,10 +81,11 @@ function Chat({ onNavigate }) {
     return true;
   });
 
-  return (
-    <div className="mobile-container">
-      <div className="chat-screen">
-        {/* 네비게이션 바 - top: 0으로 배치 (상태바 제거) */}
+  const screen = (
+    <div className="chat-screen">
+        {/* 상단 44px 상태바 공간 */}
+        <div className="chat-status-bar" aria-hidden="true" />
+        {/* 네비게이션 바 */}
         <div className="chat-nav-bar">
           <div className="chat-nav-content">
             <div className="chat-nav-title">
@@ -198,31 +199,10 @@ function Chat({ onNavigate }) {
           </div>
         )}
         </div>
-
-        {/* 하단 네비게이션 바 */}
-        <div className="bottom-nav">
-          <div className="bottom-nav-content">
-            <div className={`bottom-nav-item ${currentScreen === 'home' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('home')}>
-              <img alt="home" src={imgHome} className="bottom-nav-icon" />
-              <span>홈</span>
-            </div>
-            <div className={`bottom-nav-item ${currentScreen === 'community' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('community')}>
-              <img alt="calendar" src={imgCalendar} className="bottom-nav-icon" />
-              <span>동네생활</span>
-            </div>
-            <div className={`bottom-nav-item ${currentScreen === 'chat' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('chat')}>
-              <img alt="chat" src={imgChat} className="bottom-nav-icon" />
-              <span>채팅</span>
-            </div>
-            <div className={`bottom-nav-item ${currentScreen === 'profile' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('profile')}>
-              <img alt="user" src={imgUser} className="bottom-nav-icon" />
-              <span>나의당근</span>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
   );
+  if (embedded) return screen;
+  return <div className="mobile-container">{screen}</div>;
 }
 
 export default Chat;

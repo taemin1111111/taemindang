@@ -107,6 +107,8 @@ function CommunityPostDetail({ postId, onClose }) {
   return (
     <div className="mobile-container">
       <div className="community-post-detail-screen">
+        {/* 상단 44px 상태바 공간 */}
+        <div className="community-post-detail-status-bar" aria-hidden="true" />
         {/* 네비게이션 바 */}
         <div className="community-post-detail-nav-bar">
           <div className="community-post-detail-nav-content">

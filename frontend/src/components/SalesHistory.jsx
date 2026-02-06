@@ -62,7 +62,7 @@ function SalesHistory({ onClose, onItemClick, onWritePost }) {
   return (
     <div className="mobile-container">
       <div className="sales-history-screen">
-        {/* 상태바 제거: 네비 top: 0 (Figma 1383-46581) */}
+        <div className="sales-history-status-bar" aria-hidden="true" />
         <header className="sales-history-nav">
           <button type="button" className="sales-history-back" onClick={onClose} aria-label="뒤로">
             <BackIcon />

@@ -8,6 +8,24 @@ import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
+// 목록 조회 GET / 캐시 (60초 TTL, 상품 등록 시 무효화)
+const LIST_CACHE_TTL_MS = 60 * 1000;
+const listCache = new Map();
+function listCacheKey(q) {
+  return `${q.category ?? '__all__'}|${(q.search || '').trim()}`;
+}
+function getListCache(key) {
+  const ent = listCache.get(key);
+  if (!ent || Date.now() - ent.at > LIST_CACHE_TTL_MS) return null;
+  return ent.data;
+}
+function setListCache(key, data) {
+  listCache.set(key, { data, at: Date.now() });
+}
+function invalidateListCache() {
+  listCache.clear();
+}
+
 // __dirname 설정 (ES 모듈)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -106,6 +124,7 @@ router.post('/', authenticateToken, upload.array('images', 5), async (req, res) 
 
     await Promise.all(imagePromises);
 
+    invalidateListCache();
     res.status(201).json({
       success: true,
       message: '상품이 등록되었습니다',
@@ -124,11 +143,16 @@ router.post('/', authenticateToken, upload.array('images', 5), async (req, res) 
   }
 });
 
-// 상품 리스트 조회 (찜 갯수 포함, 대표사진만)
+// 상품 리스트 조회 (찜 갯수 포함, 대표사진만, 60초 캐시)
 router.get('/', async (req, res) => {
   try {
     const { category, search } = req.query;
-    
+    const cacheKey = listCacheKey({ category, search });
+    const cached = getListCache(cacheKey);
+    if (cached) {
+      return res.json({ success: true, data: cached });
+    }
+
     // 기본 쿼리
     let query = `
       SELECT 
@@ -177,7 +201,8 @@ router.get('/', async (req, res) => {
       price: parseInt(item.price),
       comment_count: 0 // item_comments 테이블이 없으므로 기본값 0
     }));
-    
+
+    setListCache(cacheKey, itemsWithFullImageUrl);
     res.json({
       success: true,
       data: itemsWithFullImageUrl

@@ -22,10 +22,20 @@
   box-sizing: border-box;
 }
 
-/* 네비게이션 바 - top: 0으로 배치 (상태바 제거) */
-.search-results-nav-bar {
+/* 상단 44px 상태바 공간 */
+.search-results-status-bar {
   position: absolute;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+/* 네비게이션 바 (상태바 44px 아래) */
+.search-results-nav-bar {
+  position: absolute;
+  top: 44px;
   left: 0;
   width: 375px;
   height: 56px; /* 44px + 12px 여백 */
@@ -184,13 +194,13 @@
   padding: 0 16px;
 }
 
-/* 검색 결과 영역 */
+/* 검색 결과 영역 (상태바 44 + 네비 56 아래), 높이 44px 줄임 */
 .search-results-content {
   position: absolute;
-  top: 56px;
+  top: 100px; /* 상태바(44) + 네비(56) */
   left: 0;
   width: 375px;
-  height: calc(100% - 56px - 34px);
+  height: calc(100% - 100px - 34px);
   background-color: #ffffff;
   overflow-y: auto;
   scrollbar-width: none;
