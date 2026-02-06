@@ -191,7 +191,7 @@
   width: 100%;
 }
 
-/* 카카오 버튼 */
+/* 카카오 버튼 - 아이콘 24px, 디자인 수치 반영 */
 .btn-kakao {
   width: 100%;
   height: 52px;
@@ -222,33 +222,27 @@
   outline: none;
 }
 
+/* 아이콘 24×24px (디자인 수치) */
 .kakao-icon {
   width: 24px;
   height: 24px;
   min-width: 24px;
   min-height: 24px;
-  max-width: 24px;
-  max-height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   flex-shrink: 0;
-  position: relative;
-  aspect-ratio: 1 / 1;
   box-sizing: border-box;
 }
 
 .kakao-icon img {
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
+  width: 24px;
+  height: 24px;
   display: block;
   object-fit: contain;
   object-position: center;
   flex-shrink: 0;
-  box-sizing: border-box;
 }
 
 .btn-kakao-text {
@@ -297,7 +291,7 @@
   letter-spacing: -0.45px;
 }
 
-/* 로그인 링크 */
+/* 로그인 링크 - 위쪽 10px 띄움 (디자인 수치) */
 .login-link {
   display: flex;
   gap: 12px;
@@ -309,7 +303,7 @@
   line-height: 1.4;
   letter-spacing: -0.35px;
   text-align: center;
-  margin-top: 0;
+  margin-top: 10px;
   margin-bottom: 0;
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from '../utils/axios';
 import './Neighborhood.css';
 
@@ -20,6 +20,26 @@ function Neighborhood({ onClose, onConfirm }) {
   const [showBottomSheet, setShowBottomSheet] = useState(false);
   const [selectedNeighborhood, setSelectedNeighborhood] = useState(null);
 
+  useEffect(() => {
+    const loadCurrentNeighborhood = async () => {
+      try {
+        const u = localStorage.getItem('user');
+        if (u) {
+          const parsed = JSON.parse(u);
+          if (parsed.neighborhood) {
+            setSelectedNeighborhood(parsed.neighborhood);
+            return;
+          }
+        }
+        const res = await axios.get('/auth/me');
+        if (res.data.success && res.data.data?.neighborhood) {
+          setSelectedNeighborhood(res.data.data.neighborhood);
+        }
+      } catch (_) {}
+    };
+    loadCurrentNeighborhood();
+  }, []);
+
   const handleSelectClick = () => {
     setShowBottomSheet(true);
   };
@@ -40,7 +60,13 @@ function Neighborhood({ onClose, onConfirm }) {
       });
 
       if (response.data.success) {
-        // 성공 시 홈 화면으로 이동
+        const u = localStorage.getItem('user');
+        if (u) {
+          try {
+            const parsed = JSON.parse(u);
+            localStorage.setItem('user', JSON.stringify({ ...parsed, neighborhood: selectedNeighborhood }));
+          } catch (_) {}
+        }
         if (onConfirm) {
           onConfirm();
         } else if (onClose) {

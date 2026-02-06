@@ -1,0 +1,175 @@
+/* 프로필 상세 (Figma 1383-49077) */
+.profile-detail-screen {
+  width: 375px;
+  height: 812px;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 34px;
+  box-sizing: border-box;
+}
+
+.profile-detail-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eceff1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.profile-detail-back {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  color: #2b2b2b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-detail-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.5px;
+}
+
+.profile-detail-nav-right {
+  width: 24px;
+}
+
+/* 본문: 상단 44px(헤더 높이) + 사방 16px (Figma 수치) */
+.profile-detail-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 44px 16px 16px 16px;
+  box-sizing: border-box;
+}
+
+/* 프로필 카드 영역: 사방 16px 여백 유지 */
+.profile-detail-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0 20px;
+  margin: 0;
+}
+
+.profile-detail-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.profile-detail-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.profile-detail-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.profile-detail-name {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+.profile-detail-temp {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ff6f0f;
+  flex-shrink: 0;
+}
+
+/* 프로필 수정 버튼 (좌우 16px 유지) */
+.profile-detail-edit-btn {
+  width: 100%;
+  padding: 14px 16px;
+  margin: 0 0 16px 0;
+  background-color: #f2f3f6;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #2b2b2b;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  box-sizing: border-box;
+}
+
+.profile-detail-edit-btn:active {
+  background-color: #e8eaed;
+}
+
+/* 활동 배지 / 판매물품 리스트 (좌우 16px는 body 패딩으로 유지) */
+.profile-detail-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+.profile-detail-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #2b2b2b;
+  cursor: pointer;
+  border-bottom: 1px solid #f2f3f6;
+  transition: background-color 0.2s;
+  box-sizing: border-box;
+}
+
+.profile-detail-list-item:last-child {
+  border-bottom: none;
+}
+
+.profile-detail-list-item:active {
+  background-color: #fafafa;
+}
+
+.profile-detail-list-item > span {
+  flex: 1;
+}
+
+.profile-detail-list-item svg {
+  flex-shrink: 0;
+  color: #a1a1a1;
+}

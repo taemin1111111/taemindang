@@ -1,0 +1,206 @@
+/* 프로필 수정 (Figma 1383-49976) - 상태바 제거, Indicator 제거, padding-bottom: 34px */
+.profile-edit-screen {
+  width: 375px;
+  height: 812px;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 34px;
+  box-sizing: border-box;
+}
+
+.profile-edit-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eceff1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.profile-edit-close {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  color: #2b2b2b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-edit-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.5px;
+}
+
+.profile-edit-complete {
+  background: none;
+  border: none;
+  padding: 0 4px;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #2b2b2b;
+  cursor: pointer;
+}
+
+.profile-edit-complete:active {
+  opacity: 0.7;
+}
+
+/* 본문: 상단 44px(헤더), 아바타는 121/122로 화면 기준 */
+.profile-edit-body {
+  flex: 1;
+  padding: 44px 0 16px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* 프로필 사진: 좌 121 / 우 122, 타이틀 아래 20, 프로필–닉네임 간격 30 */
+.profile-edit-avatar-wrap {
+  width: 132px;
+  height: 132px;
+  margin: 20px 122px 30px 121px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile-edit-avatar {
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  background-color: #e8eaed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.profile-edit-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-edit-file-input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.profile-edit-avatar-camera {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #e8eaed;
+  cursor: pointer;
+  padding: 0;
+}
+.profile-edit-avatar-camera:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.profile-edit-avatar-camera .profile-edit-camera-svg {
+  color: #a1a1a1;
+}
+
+.profile-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* 닉네임 필드 */
+
+.profile-edit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.profile-edit-label {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2b2b2b;
+  margin-bottom: 4px;
+}
+
+.profile-edit-input {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid #e8eaed;
+  border-radius: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  color: #2b2b2b;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+.profile-edit-input::placeholder {
+  color: #a1a1a1;
+}
+
+.profile-edit-input:focus {
+  outline: none;
+  border-bottom-color: #2b2b2b;
+}
+
+.profile-edit-input-error,
+.profile-edit-input.profile-edit-input-error:focus {
+  border-bottom-color: #e53935;
+}
+
+/* Figma: 빈 닉네임 제출 시 에러 메시지 (빨간 경고 아이콘 + 빨간 글씨) */
+.profile-edit-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #e53935;
+  line-height: 1.4;
+}
+
+.profile-edit-warning-icon {
+  flex-shrink: 0;
+  color: #e53935;
+}

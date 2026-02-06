@@ -127,7 +127,7 @@ router.post('/', authenticateToken, upload.array('images', 5), async (req, res) 
 // 상품 리스트 조회 (찜 갯수 포함, 대표사진만)
 router.get('/', async (req, res) => {
   try {
-    const { category } = req.query; // 필터링을 위한 카테고리 파라미터
+    const { category, search } = req.query;
     
     // 기본 쿼리
     let query = `
@@ -142,7 +142,8 @@ router.get('/', async (req, res) => {
         i.status,
         i.created_at,
         img.image_url,
-        (SELECT COUNT(*) FROM item_likes l WHERE l.item_id = i.id) AS like_count
+        (SELECT COUNT(*) FROM item_likes l WHERE l.item_id = i.id) AS like_count,
+        (SELECT COUNT(*) FROM chats c WHERE c.item_id = i.id) AS chat_count
       FROM items i
       LEFT JOIN item_images img
         ON img.item_id = i.id AND img.is_thumbnail = 1
@@ -150,6 +151,12 @@ router.get('/', async (req, res) => {
     `;
     
     const params = [];
+    
+    // 검색어 필터링
+    if (search && search.trim()) {
+      query += ' AND i.title LIKE ?';
+      params.push(`%${search.trim()}%`);
+    }
     
     // 카테고리 필터링
     if (category && category !== '전체') {
@@ -160,13 +167,15 @@ router.get('/', async (req, res) => {
     query += ' ORDER BY i.created_at DESC';
     
     const [items] = await pool.execute(query, params);
-    
+
     // 이미지 URL을 절대 경로로 변환
     const itemsWithFullImageUrl = items.map(item => ({
       ...item,
       image_url: item.image_url ? `http://localhost:5000${item.image_url}` : null,
       like_count: parseInt(item.like_count) || 0,
-      price: parseInt(item.price)
+      chat_count: parseInt(item.chat_count) || 0,
+      price: parseInt(item.price),
+      comment_count: 0 // item_comments 테이블이 없으므로 기본값 0
     }));
     
     res.json({
@@ -178,7 +187,153 @@ router.get('/', async (req, res) => {
     res.status(500).json({
       success: false,
       message: '상품 리스트 조회 중 오류가 발생했습니다',
-      error: error.message
+      ...(process.env.NODE_ENV !== 'production' && { error: error.message })
+    });
+  }
+});
+
+// 내 판매 목록 조회 (로그인 사용자 본인 상품만, status: SELLING | SOLD)
+router.get('/my', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const status = (req.query.status || 'SELLING').toUpperCase();
+    const validStatus = ['SELLING', 'SOLD'].includes(status) ? status : 'SELLING';
+
+    const query = `
+      SELECT 
+        i.id,
+        i.seller_id,
+        i.title,
+        i.description,
+        i.price,
+        i.category,
+        i.neighborhood,
+        i.status,
+        i.created_at,
+        img.image_url,
+        (SELECT COUNT(*) FROM item_likes l WHERE l.item_id = i.id) AS like_count,
+        (SELECT COUNT(*) FROM chats c WHERE c.item_id = i.id) AS chat_count
+      FROM items i
+      LEFT JOIN item_images img ON img.item_id = i.id AND img.is_thumbnail = 1
+      WHERE i.seller_id = ? AND i.status = ?
+      ORDER BY i.created_at DESC
+    `;
+    const [items] = await pool.execute(query, [userId, validStatus]);
+
+    const itemsWithFullImageUrl = items.map(item => ({
+      ...item,
+      image_url: item.image_url ? `http://localhost:5000${item.image_url}` : null,
+      like_count: parseInt(item.like_count) || 0,
+      chat_count: parseInt(item.chat_count) || 0,
+      price: parseInt(item.price)
+    }));
+
+    res.json({
+      success: true,
+      data: itemsWithFullImageUrl
+    });
+  } catch (error) {
+    console.error('내 판매 목록 조회 오류:', error);
+    res.status(500).json({
+      success: false,
+      message: '내 판매 목록 조회 중 오류가 발생했습니다',
+      ...(process.env.NODE_ENV !== 'production' && { error: error.message })
+    });
+  }
+});
+
+// 내 구매 목록 조회 (로그인 사용자가 구매한 상품만, status SOLD)
+router.get('/purchased', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    const query = `
+      SELECT 
+        i.id,
+        i.seller_id,
+        i.title,
+        i.description,
+        i.price,
+        i.category,
+        i.neighborhood,
+        i.status,
+        i.created_at,
+        img.image_url,
+        (SELECT COUNT(*) FROM item_likes l WHERE l.item_id = i.id) AS like_count,
+        (SELECT COUNT(*) FROM chats c WHERE c.item_id = i.id) AS chat_count
+      FROM items i
+      LEFT JOIN item_images img ON img.item_id = i.id AND img.is_thumbnail = 1
+      WHERE i.buyer_id = ? AND i.status = 'SOLD'
+      ORDER BY i.created_at DESC
+    `;
+    const [items] = await pool.execute(query, [userId]);
+
+    const itemsWithFullImageUrl = items.map(item => ({
+      ...item,
+      image_url: item.image_url ? `http://localhost:5000${item.image_url}` : null,
+      like_count: parseInt(item.like_count) || 0,
+      chat_count: parseInt(item.chat_count) || 0,
+      price: parseInt(item.price)
+    }));
+
+    res.json({
+      success: true,
+      data: itemsWithFullImageUrl
+    });
+  } catch (error) {
+    console.error('내 구매 목록 조회 오류:', error);
+    res.status(500).json({
+      success: false,
+      message: '내 구매 목록 조회 중 오류가 발생했습니다',
+      ...(process.env.NODE_ENV !== 'production' && { error: error.message })
+    });
+  }
+});
+
+// 관심목록 조회 (로그인 사용자가 찜한 상품)
+router.get('/liked', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    const query = `
+      SELECT 
+        i.id,
+        i.seller_id,
+        i.title,
+        i.description,
+        i.price,
+        i.category,
+        i.neighborhood,
+        i.status,
+        i.created_at,
+        img.image_url,
+        (SELECT COUNT(*) FROM item_likes l WHERE l.item_id = i.id) AS like_count,
+        (SELECT COUNT(*) FROM chats c WHERE c.item_id = i.id) AS chat_count
+      FROM items i
+      INNER JOIN item_likes il ON il.item_id = i.id AND il.user_id = ?
+      LEFT JOIN item_images img ON img.item_id = i.id AND img.is_thumbnail = 1
+      ORDER BY i.created_at DESC
+    `;
+    const [items] = await pool.execute(query, [userId]);
+
+    const itemsWithFullImageUrl = items.map(item => ({
+      ...item,
+      image_url: item.image_url ? `http://localhost:5000${item.image_url}` : null,
+      like_count: parseInt(item.like_count) || 0,
+      chat_count: parseInt(item.chat_count) || 0,
+      price: parseInt(item.price)
+    }));
+
+    res.json({
+      success: true,
+      data: itemsWithFullImageUrl
+    });
+  } catch (error) {
+    console.error('관심목록 조회 오류:', error);
+    res.status(500).json({
+      success: false,
+      message: '관심목록 조회 중 오류가 발생했습니다',
+      ...(process.env.NODE_ENV !== 'production' && { error: error.message })
     });
   }
 });
@@ -220,7 +375,8 @@ router.get('/:id', async (req, res) => {
         (SELECT COUNT(*) FROM item_likes l WHERE l.item_id = i.id) AS like_count,
         m.nickname AS seller_nickname,
         m.neighborhood AS seller_neighborhood,
-        m.temperature AS seller_temperature
+        m.temperature AS seller_temperature,
+        m.profile_image AS seller_profile_image
       FROM items i
       LEFT JOIN members m ON i.seller_id = m.id
       WHERE i.id = ?`,
@@ -245,6 +401,13 @@ router.get('/:id', async (req, res) => {
       );
       isLiked = likes.length > 0;
     }
+    
+    // 해당 상품의 채팅 개수 조회
+    const [chatCountResult] = await pool.execute(
+      'SELECT COUNT(*) AS chat_count FROM chats WHERE item_id = ?',
+      [id]
+    );
+    const chatCount = parseInt(chatCountResult[0].chat_count) || 0;
     
     // 상품의 모든 이미지 조회
     const [images] = await pool.execute(
@@ -271,15 +434,18 @@ router.get('/:id', async (req, res) => {
     );
     
     // 이미지 URL을 절대 경로로 변환
+    const baseUrl = process.env.API_BASE || 'http://localhost:5000';
     const itemWithData = {
       ...item,
       price: parseInt(item.price),
       like_count: parseInt(item.like_count) || 0,
       is_liked: isLiked, // 찜 여부 추가
+      chat_count: chatCount, // 채팅 개수 추가
       seller_temperature:
         item.seller_temperature !== null && item.seller_temperature !== undefined
           ? parseFloat(item.seller_temperature)
           : 36.5,
+      seller_profile_image: item.seller_profile_image ? `${baseUrl}${item.seller_profile_image}` : null,
       images: images.map(img => ({
         id: img.id,
         image_url: `http://localhost:5000${img.image_url}`,

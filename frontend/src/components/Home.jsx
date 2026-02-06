@@ -14,7 +14,7 @@ const imgComponent592 = "https://www.figma.com/api/mcp/asset/43b1bb59-9ac5-4ab2-
 const imgFavorite = "https://www.figma.com/api/mcp/asset/e4e4c007-575f-41a5-84a9-37121e1366a4";
 const imgFavoriteIcon = "https://www.figma.com/api/mcp/asset/ef975df3-be81-4998-b3eb-aefab1bab9b1";
 
-function Home({ onWritePost, onItemClick }) {
+function Home({ onWritePost, onItemClick, onNavigate, onSearch, currentScreen = 'home' }) {
   const [selectedFilter, setSelectedFilter] = useState('전체');
   const [neighborhood, setNeighborhood] = useState('선택한주소');
   const [items, setItems] = useState([]);
@@ -122,7 +122,7 @@ function Home({ onWritePost, onItemClick }) {
               <h1>{neighborhood || '선택한주소'}</h1>
             </div>
             <div className="nav-right">
-              <button className="search-btn">
+              <button className="search-btn" onClick={onSearch}>
                 <img alt="search" src={imgIconSearch} className="search-icon" />
               </button>
             </div>
@@ -185,7 +185,7 @@ function Home({ onWritePost, onItemClick }) {
                     <div className="product-tags">
                       <div className="product-tag">
                         <img alt="chat" src={imgComponent592} className="tag-icon tag-icon-chat" />
-                        <span>1</span>
+                        <span>{item.chat_count || 0}</span>
                       </div>
                       <div className="product-tag">
                         <img alt="favorite" src={imgFavoriteIcon} className="tag-icon tag-icon-favorite" />
@@ -202,19 +202,19 @@ function Home({ onWritePost, onItemClick }) {
         {/* 하단 네비게이션 바 */}
         <div className="bottom-nav">
           <div className="bottom-nav-content">
-            <div className="bottom-nav-item bottom-nav-item-active">
+            <div className={`bottom-nav-item ${currentScreen === 'home' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('home')}>
               <img alt="home" src={imgHome} className="bottom-nav-icon" />
               <span>홈</span>
             </div>
-            <div className="bottom-nav-item">
+            <div className={`bottom-nav-item ${currentScreen === 'community' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('community')}>
               <img alt="calendar" src={imgCalendar} className="bottom-nav-icon" />
               <span>동네생활</span>
             </div>
-            <div className="bottom-nav-item">
+            <div className={`bottom-nav-item ${currentScreen === 'chat' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('chat')}>
               <img alt="chat" src={imgChat} className="bottom-nav-icon" />
               <span>채팅</span>
             </div>
-            <div className="bottom-nav-item">
+            <div className={`bottom-nav-item ${currentScreen === 'profile' ? 'bottom-nav-item-active' : ''}`} onClick={() => onNavigate && onNavigate('profile')}>
               <img alt="user" src={imgUser} className="bottom-nav-icon" />
               <span>나의당근</span>
             </div>

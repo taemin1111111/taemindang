@@ -1,0 +1,751 @@
+/* 모바일 컨테이너 */
+.mobile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 채팅방 화면 */
+.chat-room-screen {
+  width: 375px;
+  height: 812px;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 34px; /* Indicator 공간 유지 */
+  box-sizing: border-box;
+}
+
+/* 네비게이션 바 - top: 0으로 배치 (상태바 제거) */
+.chat-room-nav-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 375px;
+  height: 44px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eceff1;
+  z-index: 100;
+}
+
+.chat-room-nav-content {
+  position: absolute;
+  left: 16px;
+  top: 0;
+  width: calc(375px - 32px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.chat-room-nav-left {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 10px 0;
+  width: 104px;
+}
+
+.chat-room-back-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.chat-room-back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.chat-room-nav-center {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
+  flex: 1;
+}
+
+.chat-room-nav-name {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.45px;
+}
+
+.chat-room-nav-badge {
+  background-color: #fff6e2;
+  border-radius: 100px;
+  padding: 4px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-room-nav-badge span {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #f9b83d;
+  letter-spacing: -0.3px;
+}
+
+.chat-room-nav-right {
+  width: 104px;
+  height: 44px;
+}
+
+/* 상품 정보 섹션 */
+.chat-room-item-section {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  width: 375px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eceff1;
+  border-top: 1px solid #eceff1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #ffffff;
+  z-index: 50;
+}
+
+.chat-room-item-info {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.chat-room-item-thumbnail {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: #f7f8f9;
+}
+
+.chat-room-item-thumbnail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chat-room-item-thumbnail-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f7f8f9;
+}
+
+.chat-room-item-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: center;
+}
+
+.chat-room-item-status-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 0;
+  flex-wrap: wrap;
+}
+
+.chat-room-item-status-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  margin: 0;
+}
+
+.chat-room-item-status-row > .chat-room-item-title {
+  margin-left: 12px;
+}
+
+.chat-room-item-status {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.35px;
+  white-space: nowrap;
+}
+
+.chat-room-item-status-text {
+  cursor: default;
+  display: inline-block;
+}
+
+.chat-room-item-arrow-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.chat-room-item-arrow,
+.chat-room-item-arrow-svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
+  color: #2b2b2b;
+}
+
+.chat-room-item-title {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.35px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.chat-room-item-price {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.35px;
+  margin: 0;
+  margin-top: 0;
+}
+
+/* Figma: 흰 배경, 연한 테두리, 캘린더 아이콘 + 약속잡기 텍스트 */
+.chat-room-appointment-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 32px;
+  padding: 8px 10px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 999px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.chat-room-appointment-icon {
+  width: 12px;
+  height: 12px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.chat-room-appointment-btn span {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.03em; /* -2.5% */
+  color: #2b2b2b;
+}
+
+/* 판매 상태 선택 바텀시트 - 채팅 화면(.chat-room-screen) 안에서만 표시 */
+.chat-room-status-sheet-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+.chat-room-status-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffff;
+  border-radius: 12px 12px 0 0;
+  padding: 4px 0;
+  padding-bottom: max(21px, env(safe-area-inset-bottom)); /* 닫기 버튼 밑 흰색 공간 21px */
+  z-index: 1001;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  max-height: 40%;
+  box-sizing: border-box;
+}
+
+.chat-room-status-sheet-option {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #2b2b2b;
+  text-align: center;
+  cursor: pointer;
+}
+
+.chat-room-status-sheet-option:active {
+  background-color: #f7f8f9;
+}
+
+.chat-room-status-sheet-divider {
+  height: 1px;
+  background-color: #e8eaed;
+  margin: 0 12px;
+}
+
+.chat-room-status-sheet-close {
+  font-weight: 500;
+}
+
+/* 거래완료 확인 모달: 양옆 65px, 아래에서 402px, 확인 눌러야 사라짐 */
+.chat-room-sold-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+.chat-room-sold-modal {
+  position: absolute;
+  left: 65px;
+  right: 65px;
+  bottom: 402px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  z-index: 1001;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-room-sold-modal-text {
+  margin: 0;
+  padding: 24px 18px;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #2b2b2b;
+  text-align: center;
+}
+
+.chat-room-sold-modal-btn {
+  margin: 0 18px 18px 18px;
+  padding: 16px;
+  background-color: #ff6f0f;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chat-room-sold-modal-btn:active {
+  opacity: 0.9;
+}
+
+/* 메시지 영역 */
+.chat-room-messages {
+  position: absolute;
+  top: 152px; /* 네비게이션(44px) + 상품 정보(108px) */
+  left: 0;
+  width: 375px;
+  height: calc(812px - 152px - 70px - 34px); /* 전체 높이 - 상단 - 입력바(70px) - indicator(34px) */
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.chat-room-messages::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.chat-room-message-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.chat-room-date-separator {
+  text-align: center;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #a1a1a1;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.chat-room-message-item {
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.chat-room-message-item-has-confirmed {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.chat-room-message-item-row {
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.chat-room-message-mine .chat-room-message-item-row {
+  flex-direction: row-reverse;
+}
+
+.chat-room-message-mine {
+  flex-direction: row-reverse;
+}
+
+.chat-room-message-item-has-confirmed.chat-room-message-mine {
+  flex-direction: column;
+}
+
+.chat-room-message-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 100px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.chat-room-message-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 100px;
+  display: block;
+}
+
+.chat-room-message-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: calc(100% - 42px);
+}
+
+.chat-room-message-bubble {
+  background-color: #f2f3f6;
+  border-radius: 14px;
+  padding: 6px 12px;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.4px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 240px;
+}
+
+.chat-room-message-image-wrap {
+  padding: 0;
+  overflow: hidden;
+  max-width: 200px;
+  border-radius: 12px;
+}
+
+.chat-room-message-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+
+/* 약속 메시지 카드 (Figma 1383-40057) */
+.chat-room-appointment-card {
+  background-color: #ffffff;
+  border: 1px solid #e8eaed;
+  border-radius: 12px;
+  padding: 14px 16px;
+  max-width: 260px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.chat-room-appointment-card-mine {
+  background-color: #ffffff;
+  border-color: #e8eaed;
+}
+
+.chat-room-appointment-card-title {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2b2b2b;
+  margin: 0 0 8px 0;
+}
+
+.chat-room-appointment-card-detail {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #666666;
+  margin: 0 0 4px 0;
+}
+
+.chat-room-appointment-card-detail:last-of-type {
+  margin-bottom: 12px;
+}
+
+.chat-room-appointment-card-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  background-color: #f2f3f6;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2b2b2b;
+  cursor: pointer;
+}
+
+.chat-room-appointment-card-btn:hover {
+  background-color: #e8eaed;
+}
+
+/* 약속 카드 바로 아래 "(닉네임)님이 약속을 잡았어요." — 아무것도 없이 텍스트만, 수치: 위 10px */
+.chat-room-appointment-confirmed-below {
+  margin: 10px 0 0 0;
+  padding: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #a1a1a1;
+  text-align: center;
+  width: 100%;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.chat-room-message-bubble-mine {
+  background-color: #ff6f0f;
+  color: #ffffff;
+}
+
+.chat-room-message-time {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #b9b9b9;
+  letter-spacing: -0.25px;
+  white-space: nowrap;
+}
+
+.chat-room-message-time-mine {
+  text-align: right;
+}
+
+.chat-room-empty-messages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 40px 20px;
+}
+
+.chat-room-empty-messages p {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #a1a1a1;
+  letter-spacing: -0.35px;
+  margin: 0;
+}
+
+/* 사진 선택용 숨김 input */
+.chat-room-file-input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* 하단 입력 바 */
+.chat-room-input-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 375px;
+  background-color: #ffffff;
+  border-top: 1px solid #eceff1;
+  padding: 10px 16px;
+  padding-bottom: calc(10px + 34px); /* Indicator 공간 포함 */
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.chat-room-pic-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.chat-room-pic-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.chat-room-input-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.chat-room-input {
+  flex: 1;
+  height: 40px;
+  padding: 10px 16px;
+  background-color: #f2f3f6; /* gray/light Gray1 */
+  border: none;
+  border-radius: 6px;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.35px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.chat-room-input::placeholder {
+  color: #b9b9b9; /* gray/30 */
+  opacity: 1;
+}
+
+.chat-room-input:focus {
+  outline: none;
+}
+
+.chat-room-send-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.chat-room-send-btn:disabled {
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.chat-room-send-btn:disabled .chat-room-send-icon {
+  opacity: 0.5;
+  filter: grayscale(100%);
+}
+
+.chat-room-send-btn-active .chat-room-send-icon {
+  filter: brightness(0) saturate(100%) invert(37%) sepia(100%) saturate(2000%) hue-rotate(0deg) brightness(1.1);
+}
+
+.chat-room-send-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  transition: filter 0.2s ease;
+}
+
+/* 반응형 */
+@media (max-width: 415px) {
+  .mobile-container {
+    padding: 0;
+  }
+  
+  .chat-room-screen {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .chat-room-nav-bar {
+    width: 100vw;
+  }
+
+  .chat-room-item-section {
+    width: 100vw;
+  }
+
+  .chat-room-messages {
+    width: 100vw;
+  }
+
+  .chat-room-input-bar {
+    width: 100vw;
+  }
+}

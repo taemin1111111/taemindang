@@ -6,6 +6,9 @@ import { fileURLToPath } from 'url';
 import pool, { testConnection } from './config/database.js';
 import authRoutes from './routes/auth.js';
 import itemsRoutes from './routes/items.js';
+import communityRoutes from './routes/community.js';
+import searchRoutes from './routes/search.js';
+import chatsRoutes from './routes/chats.js';
 
 dotenv.config();
 
@@ -38,6 +41,15 @@ app.use('/auth', authRoutes);
 
 // Items routes
 app.use('/items', itemsRoutes);
+
+// Community routes
+app.use('/community', communityRoutes);
+
+// Search routes
+app.use('/search', searchRoutes);
+
+// Chats routes
+app.use('/chats', chatsRoutes);
 
 // Start server
 app.listen(PORT, async () => {

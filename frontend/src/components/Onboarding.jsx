@@ -1,7 +1,7 @@
 import './Onboarding.css';
+import kakaoIcon from '../assets/kakao-icon.svg';
 
 // Figma 이미지 URL
-const imgKakao = "https://www.figma.com/api/mcp/asset/538ff0cc-28e0-4be5-b86e-bc21ccb2e251";
 const imgLogo1 = "https://www.figma.com/api/mcp/asset/4a521145-04fd-4f1d-ab96-bd2b9c875452";
 const imgLogo2 = "https://www.figma.com/api/mcp/asset/4d667e3f-05d4-49d4-a927-33a80a22a88e";
 
@@ -36,9 +36,9 @@ function Onboarding({ onStartClick, onLoginClick }) {
             <div className="buttons-wrapper">
               <button className="btn-kakao">
                 <div className="kakao-icon">
-                  <img alt="kakao" src={imgKakao} />
+                  <img alt="카카오" src={kakaoIcon} width={24} height={24} />
                 </div>
-                <span className="btn-kakao-text">카카오로 시작</span>
+                <span className="btn-kakao-text">카카오로 시작하기</span>
               </button>
               
               <button className="btn-start" onClick={onStartClick}>

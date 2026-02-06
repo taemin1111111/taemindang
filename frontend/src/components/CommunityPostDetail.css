@@ -1,0 +1,473 @@
+/* 모바일 컨테이너 */
+.mobile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 동네생활 게시글 상세 화면 */
+.community-post-detail-screen {
+  width: 375px;
+  height: 812px;
+  background-color: #ffffff;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  padding-bottom: 34px; /* Indicator 공간 유지 */
+}
+
+.community-post-detail-screen::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* 네비게이션 바 - top: 0으로 배치 (상태바 제거) */
+.community-post-detail-nav-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 375px;
+  height: 44px;
+  background-color: #ffffff;
+  border-bottom: none;
+  z-index: 100;
+}
+
+.community-post-detail-nav-content {
+  position: absolute;
+  left: 16px;
+  top: 0;
+  width: 343px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.community-post-detail-nav-left {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 10px 0;
+  width: 104px;
+}
+
+.community-post-detail-back-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.community-post-detail-back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.community-post-detail-nav-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 44px;
+  padding: 10px 0;
+}
+
+.community-post-detail-nav-title {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  color: #212224;
+}
+
+/* 게시글 메인 영역 */
+.community-post-detail-main {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100% - 44px - 50px - 34px); /* 전체 높이 - 네비 - 입력바 - indicator 공간 */
+}
+
+/* 게시글 내용 */
+.community-post-detail-content {
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.community-post-detail-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 343px;
+}
+
+.community-post-detail-badge {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 7px 8px;
+  background-color: #e8e8e8;
+  border-radius: 50px;
+  width: fit-content;
+}
+
+.community-post-detail-badge-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.community-post-detail-badge span {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #424242;
+  letter-spacing: -0.3px;
+}
+
+.community-post-detail-user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.community-post-detail-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 100px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: #f7f8f9;
+}
+
+.community-post-detail-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.community-post-detail-user-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.community-post-detail-username {
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.35px;
+}
+
+.community-post-detail-user-meta {
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #a1a1a1;
+  letter-spacing: -0.3px;
+}
+
+.community-post-detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  width: 100%;
+}
+
+.community-post-detail-title {
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #212224;
+  letter-spacing: -0.5px;
+}
+
+.community-post-detail-text {
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.35px;
+  white-space: pre-wrap;
+}
+
+.community-post-detail-footer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+}
+
+.community-post-detail-view-icon {
+  width: 17px;
+  height: 17px;
+  display: block;
+}
+
+.community-post-detail-view-count {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #a1a1a1;
+}
+
+/* 구분선 */
+.community-post-detail-divider {
+  width: 375px;
+  height: 7px;
+  background-color: #f3f4f5;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* 댓글 섹션 */
+.community-post-detail-comments {
+  width: 375px;
+  min-height: 200px;
+  background-color: #ffffff;
+  padding: 20px;
+  padding-bottom: 80px; /* 댓글 입력 바 공간 확보 */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.community-post-detail-comments-title {
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #212224;
+  letter-spacing: -0.35px;
+}
+
+.community-post-detail-no-comments {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.community-post-detail-no-comments p {
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #d0d0d0;
+  text-align: center;
+}
+
+.community-post-detail-comments-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* 댓글 아이템 */
+.community-post-detail-comment-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 16px;
+  border-bottom: none;
+}
+
+.community-post-detail-comment-item:last-child {
+  padding-bottom: 0;
+}
+
+.community-post-detail-comment-user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.community-post-detail-comment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 100px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: #f7f8f9;
+  border: 1px solid #d0d0d0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.community-post-detail-comment-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.community-post-detail-comment-user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.community-post-detail-comment-username {
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.35px;
+}
+
+.community-post-detail-comment-time {
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #a1a1a1;
+  letter-spacing: -0.3px;
+}
+
+.community-post-detail-comment-content {
+  margin: 0;
+  margin-left: 40px; /* 아바타 + gap */
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #2b2b2b;
+  letter-spacing: -0.35px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 댓글 입력 바 - 고정 */
+.community-post-detail-comment-input-bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 375px;
+  max-width: 375px;
+  background-color: #ffffff;
+  padding: 10px 16px;
+  padding-bottom: calc(10px + 34px); /* Indicator 공간 포함 */
+  box-sizing: border-box;
+  z-index: 1000;
+  border-top: 1px solid #f0f0f0;
+}
+
+.community-post-detail-comment-input-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.community-post-detail-comment-input {
+  width: 100%;
+  height: 40px;
+  padding: 10px 16px;
+  background-color: #f7f8f9;
+  border: 1px solid #e8e8e8;
+  border-radius: 20px; /* 더 둥근 모서리 */
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.35px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.community-post-detail-comment-input:focus {
+  border-color: #d0d0d0;
+}
+
+.community-post-detail-comment-input::placeholder {
+  color: #b9b9b9;
+  font-weight: 400;
+}
+
+/* 반응형 */
+@media (max-width: 415px) {
+  .mobile-container {
+    padding: 0;
+  }
+  
+  .community-post-detail-screen {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .community-post-detail-nav-bar {
+    width: 100vw;
+  }
+
+  .community-post-detail-main {
+    width: 100vw;
+  }
+
+  .community-post-detail-content {
+    width: 100vw;
+  }
+
+  .community-post-detail-divider {
+    width: 100vw;
+  }
+
+  .community-post-detail-comments {
+    width: 100vw;
+  }
+
+  .community-post-detail-comment-input-bar {
+    width: 100vw;
+    max-width: 100vw;
+  }
+}

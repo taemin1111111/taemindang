@@ -1,10 +1,35 @@
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import multer from 'multer';
 import pool from '../config/database.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { authenticateToken } from '../middleware/auth.js';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const router = express.Router();
+
+const uploadsDir = path.join(__dirname, '../uploads');
+const profileStorage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, uploadsDir),
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '_' + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  }
+});
+const profileFileFilter = (req, file, cb) => {
+  const allowedExt = /\.(jpeg|jpg|png|gif|webp)$/i;
+  const ok = allowedExt.test(file.originalname) && (file.mimetype || '').startsWith('image/');
+  cb(null, ok);
+};
+const uploadProfileImage = multer({
+  storage: profileStorage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: profileFileFilter
+});
 
 // 이메일 중복 확인
 router.post('/check-email', async (req, res) => {
@@ -92,7 +117,7 @@ router.post('/login', async (req, res) => {
 
     // 이메일로 사용자 찾기
     const [users] = await pool.execute(
-      'SELECT id, email, password, nickname, neighborhood, temperature FROM members WHERE email = ?',
+      'SELECT id, email, password, nickname, neighborhood, temperature, profile_image FROM members WHERE email = ?',
       [email.trim()]
     );
 
@@ -125,6 +150,9 @@ router.post('/login', async (req, res) => {
       { expiresIn: '24h' }
     );
 
+    const baseUrl = process.env.API_BASE || 'http://localhost:5000';
+    const profileImageUrl = user.profile_image ? `${baseUrl}${user.profile_image}` : null;
+
     // 로그인 성공
     res.status(200).json({
       success: true,
@@ -135,6 +163,7 @@ router.post('/login', async (req, res) => {
         nickname: user.nickname,
         neighborhood: user.neighborhood,
         temperature: user.temperature,
+        profile_image: profileImageUrl,
         token: token
       }
     });
@@ -153,7 +182,7 @@ router.get('/me', authenticateToken, async (req, res) => {
     const userId = req.user.userId;
 
     const [users] = await pool.execute(
-      'SELECT id, email, nickname, neighborhood, temperature FROM members WHERE id = ?',
+      'SELECT id, email, nickname, neighborhood, temperature, profile_image FROM members WHERE id = ?',
       [userId]
     );
 
@@ -164,15 +193,82 @@ router.get('/me', authenticateToken, async (req, res) => {
       });
     }
 
+    const baseUrl = process.env.API_BASE || 'http://localhost:5000';
+    const data = {
+      ...users[0],
+      profile_image: users[0].profile_image ? `${baseUrl}${users[0].profile_image}` : null
+    };
+
     res.status(200).json({
       success: true,
-      data: users[0]
+      data
     });
   } catch (error) {
     console.error('사용자 정보 조회 오류:', error);
     res.status(500).json({
       success: false,
-      message: '사용자 정보 조회 중 오류가 발생했습니다'
+      message: '사용자 정보 조회 중 오류가 발생했습니다',
+      ...(process.env.NODE_ENV !== 'production' && { error: error.message })
+    });
+  }
+});
+
+// 프로필 사진 변경 (업로드)
+router.put('/profile-image', authenticateToken, uploadProfileImage.single('profile_image'), async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: '이미지 파일을 선택해주세요.'
+      });
+    }
+    const profilePath = '/uploads/' + req.file.filename;
+    await pool.execute('UPDATE members SET profile_image = ? WHERE id = ?', [profilePath, userId]);
+
+    const baseUrl = process.env.API_BASE || 'http://localhost:5000';
+    const profile_image = `${baseUrl}${profilePath}`;
+
+    res.status(200).json({
+      success: true,
+      message: '프로필 사진이 변경되었습니다.',
+      data: { profile_image }
+    });
+  } catch (error) {
+    console.error('프로필 사진 변경 오류:', error);
+    res.status(500).json({
+      success: false,
+      message: '프로필 사진 변경 중 오류가 발생했습니다.'
+    });
+  }
+});
+
+// 닉네임 수정
+router.put('/nickname', authenticateToken, async (req, res) => {
+  try {
+    const { nickname } = req.body;
+    const userId = req.user.userId;
+
+    const trimmed = typeof nickname === 'string' ? nickname.trim() : '';
+    if (!trimmed) {
+      return res.status(400).json({
+        success: false,
+        message: '닉네임을 입력해주세요.'
+      });
+    }
+
+    await pool.execute('UPDATE members SET nickname = ? WHERE id = ?', [trimmed, userId]);
+
+    res.status(200).json({
+      success: true,
+      message: '닉네임이 변경되었습니다.',
+      data: { nickname: trimmed }
+    });
+  } catch (error) {
+    console.error('닉네임 수정 오류:', error);
+    res.status(500).json({
+      success: false,
+      message: '닉네임 수정 중 오류가 발생했습니다.'
     });
   }
 });

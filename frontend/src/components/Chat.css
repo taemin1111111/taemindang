@@ -1,0 +1,359 @@
+/* 모바일 컨테이너 */
+.mobile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 채팅 화면 */
+.chat-screen {
+  width: 375px;
+  height: 812px;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  padding-bottom: 34px; /* Indicator 공간 유지 */
+  box-sizing: border-box;
+}
+
+/* 네비게이션 바 - top: 0으로 배치 (상태바 제거) */
+.chat-nav-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 375px;
+  height: 44px;
+  background-color: #ffffff;
+  z-index: 100;
+}
+
+.chat-nav-content {
+  position: absolute;
+  left: 16px;
+  top: 0;
+  width: calc(375px - 32px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.chat-nav-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 44px;
+}
+
+.chat-title {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+.chat-nav-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 44px;
+  opacity: 0; /* 현재는 숨김 */
+}
+
+/* 필터 버튼들 */
+.chat-filters {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  width: 375px;
+  padding: 10px 16px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  background-color: #ffffff;
+  z-index: 50;
+}
+
+.chat-filter-btn {
+  padding: 6px 14px;
+  border: 1px solid #f2f3f6;
+  border-radius: 20px;
+  background-color: #ffffff;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #212224;
+  letter-spacing: -0.3px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.chat-filter-btn-active {
+  background-color: #424242;
+  border-color: #424242;
+  color: #ffffff;
+}
+
+.chat-filter-btn:hover {
+  border-color: #d0d0d0;
+}
+
+.chat-filter-btn-active:hover {
+  border-color: #424242;
+}
+
+/* 스크롤 가능한 콘텐츠 영역 */
+.chat-content {
+  position: absolute;
+  top: 102px; /* 네비게이션(44px) + 필터(58px) */
+  left: 0;
+  width: 375px;
+  height: calc(812px - 102px - 80px); /* 전체 높이 - 상단 - 하단 네비게이션 */
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.chat-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* 로딩 상태 */
+.chat-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-loading-text {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #a1a1a1;
+  letter-spacing: -0.35px;
+}
+
+/* 빈 상태 */
+.chat-empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.chat-empty-icon {
+  width: 40px;
+  height: 69px;
+  display: block;
+}
+
+.chat-empty-text {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #d0d0d0;
+  letter-spacing: -0.35px;
+  text-align: center;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* 채팅방 목록 */
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+}
+
+.chat-item {
+  width: 100%;
+  padding: 16px;
+  border-bottom: 1px solid #f2f3f6;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.chat-item:hover {
+  background-color: #fafafa;
+}
+
+.chat-item:active {
+  background-color: #f5f5f5;
+}
+
+.chat-item-content {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+}
+
+/* 상품 썸네일 */
+.chat-item-thumbnail {
+  width: 52px;
+  height: 52px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: #f7f8f9;
+}
+
+.chat-thumbnail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chat-thumbnail-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f7f8f9;
+}
+
+/* 채팅 정보 */
+.chat-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.chat-item-header {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.chat-item-name {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  height: 22px;
+  color: #2b2b2b;
+  letter-spacing: -0.4px;
+  flex-shrink: 0;
+}
+
+.chat-item-separator {
+  color: #868b94;
+  font-size: 13px;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+
+.chat-item-tag {
+  font-family: 'Karrot Sans Text', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #868b94;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* 안읽은 메시지 배지 */
+.chat-unread-badge {
+  background-color: #4285F4;
+  color: #FFFFFF;
+  border-radius: 50%;
+  min-width: 20px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.chat-item-message {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  height: 18px;
+  color: #2b2b2b;
+  letter-spacing: -0.325px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  max-width: 229px;
+}
+
+/* 상대방 프로필 */
+.chat-item-profile {
+  flex-shrink: 0;
+}
+
+.chat-profile-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 100px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.chat-profile-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 100px;
+  display: block;
+}
+
+/* 하단 네비: Home.css의 .bottom-nav 그대로 사용 */
+
+/* 반응형 */
+@media (max-width: 415px) {
+  .mobile-container {
+    padding: 0;
+  }
+  
+  .chat-screen {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .chat-nav-bar {
+    width: 100vw;
+  }
+
+  .chat-filters {
+    width: 100vw;
+  }
+}

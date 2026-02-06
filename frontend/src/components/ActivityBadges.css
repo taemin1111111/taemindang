@@ -1,0 +1,210 @@
+/* 활동배지 (Figma 1383-49130) */
+.activity-badges-screen {
+  width: 375px;
+  height: 812px;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 34px;
+  box-sizing: border-box;
+}
+
+.activity-badges-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eceff1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.activity-badges-close {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  color: #2b2b2b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activity-badges-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2b2b2b;
+  letter-spacing: -0.5px;
+}
+
+.activity-badges-nav-right {
+  width: 24px;
+}
+
+/* 본문: 상단 44px(헤더) + 좌우 16px, 배지 영역은 30px 띄움 (사진 수치) */
+.activity-badges-body {
+  flex: 1;
+  padding: 44px 30px 16px 30px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* 배지 그리드: 좌우 30(body), 행 간격 30, 열은 91px 3개 + 간격으로 315 안에 */
+.activity-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 91px);
+  row-gap: 30px;
+  column-gap: 21px;
+  margin-top: 30px;
+}
+
+/* 카드 = 박스 + 8px + 이름 (박스와 이름은 따로). 잠긴 뱃지만 클릭 가능 */
+.activity-badges-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.activity-badges-card:has(.activity-badges-card-icon-box-locked) {
+  cursor: pointer;
+}
+
+/* 박스: 뱃지 있던 없던 #F7F8F9 단색, 테두리 없음 */
+.activity-badges-card-icon-box {
+  width: 91px;
+  height: 92px;
+  border-radius: 12px;
+  border: none;
+  background-color: #F7F8F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.activity-badges-card-icon-box-unlocked,
+.activity-badges-card-icon-box-locked {
+  background-color: #F7F8F9;
+  border: none;
+}
+
+/* 아이콘 영역: 패딩 4.85 상하, 4 좌우 */
+.activity-badges-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4.85px 4px;
+  box-sizing: border-box;
+}
+
+/* 뱃지 이름: 박스 아래 따로, 8px 띄움 */
+.activity-badges-card-label {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #2b2b2b;
+  text-align: center;
+  margin-top: 8px;
+  line-height: 1.3;
+  width: 91px;
+}
+
+/* 아이콘 전체: 2번 패딩 반영 시 36×39.28 (4+28+4, 4.85+9.86+19.72+4.85) */
+.activity-badges-bag-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 39.28px;
+}
+
+.activity-badges-bag-svg {
+  width: 36px;
+  height: 39.28px;
+  display: block;
+}
+
+/* 흰색 1: 바디 중앙 (4+14, 14.71+9.86) = (18, 24.57) in viewBox 0 0 36 40 */
+.activity-badges-bag-number {
+  position: absolute;
+  top: 61.4%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+/* 잠긴 뱃지 클릭 시 알림 모달 (Figma 1383-49976) */
+.activity-badges-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.activity-badges-modal {
+  width: 100%;
+  max-width: 327px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  padding: 24px 18px 18px;
+}
+
+.activity-badges-modal-text {
+  margin: 0 0 24px;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #2b2b2b;
+  text-align: center;
+  letter-spacing: -0.4px;
+}
+
+.activity-badges-modal-btn {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ff6f0f;
+  color: #ffffff;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.activity-badges-modal-btn:active {
+  opacity: 0.9;
+}

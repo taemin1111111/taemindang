@@ -1,4 +1,4 @@
-/* 모바일 컨테이너 - PC에서도 가운데에 딱 뜨게 */
+/* 모바일 컨테이너 */
 .mobile-container {
   display: flex;
   justify-content: center;
@@ -10,7 +10,7 @@
 }
 
 /* 모바일 화면 (375px 고정) */
-.home-screen {
+.community-life-screen {
   width: 375px;
   height: 812px;
   background-color: #ffffff;
@@ -19,6 +19,7 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   border-radius: 0;
 }
+
 
 /* 네비게이션 바 */
 .nav-bar {
@@ -147,6 +148,9 @@
   flex-shrink: 0;
   height: auto;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .filter-btn-active {
@@ -154,152 +158,307 @@
   color: #ffffff;
 }
 
+
+.filter-btn-with-icon {
+  font-weight: 500;
+}
+
+.filter-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex-shrink: 0;
+}
+
 .filter-btn:hover {
   opacity: 0.9;
 }
 
-/* 상품 리스트 */
-.product-list {
+/* 게시글 리스트 */
+.post-list {
   position: absolute;
-  top: 88px; /* nav-bar(44px) + filter-section(44px) */
+  top: 88px;
   left: 0;
   right: 0;
   width: 375px;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
-  padding-top: 10px;
-  padding-bottom: 120px; /* bottom-nav + write-btn 공간 */
+  padding-top: 16px;
+  padding-bottom: 120px;
   overflow-y: auto;
-  max-height: calc(812px - 88px - 70px - 34px); /* 전체 높이 - 상단(88px) - 하단 nav(70px) - indicator(34px) */
+  max-height: calc(812px - 88px - 70px - 34px);
   box-sizing: border-box;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
 }
 
-.product-list::-webkit-scrollbar {
+.post-list::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
 
-.product-card {
+.post-card {
   display: flex;
-  gap: 16px;
-  padding: 10px 16px;
+  flex-direction: column;
+  gap: 0;
+  padding: 16px;
+  padding-bottom: 16px;
   border-bottom: 1px solid #f2f3f6;
   box-sizing: border-box;
   width: 100%;
 }
 
-.product-thumbnail {
-  width: 100px;
-  height: 100px;
-  min-width: 100px;
-  border: 1px solid #dee0e8;
-  border-radius: 6px;
-  overflow: hidden;
-  flex-shrink: 0;
-  position: relative;
-  background-color: #f7f8f9;
-}
-
-.product-thumbnail img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.product-content {
-  flex: 1;
+.post-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-width: 0;
+  gap: 4px;
+  width: 100%;
 }
 
-.product-header {
-  margin-bottom: 2px;
+.post-badge {
+  background-color: #f7f8f9;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #424242;
+  letter-spacing: -0.3px;
+  width: fit-content;
 }
 
-.product-title {
+.post-header-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+.post-title {
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.4;
   color: #2b2b2b;
   letter-spacing: -0.4px;
-  margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 219px;
-  height: 22px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+  margin: 0;
 }
 
-.product-meta {
-  margin-bottom: 2px;
-}
-
-.product-location {
+.post-description {
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 12px;
   font-weight: 400;
   line-height: 1.4;
-  color: #a2a5ac;
+  color: #a1a1a1;
+  letter-spacing: -0.3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+  margin-top: 2px;
+}
+
+.post-footer {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: 8px;
+  margin-top: 0;
+}
+
+.post-meta {
+  flex: 1;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #a1a1a1;
   letter-spacing: -0.3px;
 }
 
-.product-price {
-  margin-bottom: 2px;
-}
-
-.product-price span {
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.4;
-  color: #212224;
-  letter-spacing: -0.45px;
-}
-
-.product-footer {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-}
-
-.product-tags {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-}
-
-.product-tag {
+.post-comments {
   display: flex;
   gap: 2px;
   align-items: center;
 }
 
-.tag-icon {
+.comment-icon {
+  width: 22px;
+  height: 22px;
   display: block;
 }
 
-.tag-icon-chat {
-  width: 22px;
-  height: 22px;
-}
-
-.tag-icon-favorite {
-  width: 15px;
-  height: 15px;
-}
-
-.product-tag span {
+.post-comments span {
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 13px;
   font-weight: 400;
   line-height: 1.4;
   color: #b9b9b9;
   letter-spacing: -0.325px;
+}
+
+/* 인기 소식 섹션 */
+.popular-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 0;
+  width: 100%;
+}
+
+.popular-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px;
+  height: 44px;
+  position: relative;
+}
+
+.popular-fire-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.popular-header h2 {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #212224;
+  letter-spacing: -0.4px;
+  margin: 0;
+}
+
+.popular-arrow {
+  position: absolute;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(90deg) scaleY(-1);
+}
+
+.arrow-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.popular-cards {
+  display: flex;
+  gap: 9px;
+  padding: 0 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-x;
+}
+
+.popular-cards:active {
+  cursor: grabbing;
+}
+
+.popular-cards::-webkit-scrollbar {
+  display: none;
+}
+
+.popular-card {
+  background-color: #f2f3f6;
+  padding: 8px 12px;
+  border-radius: 10px;
+  width: 144px;
+  height: 144px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.popular-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  width: 119px;
+}
+
+.popular-badge {
+  background-color: #f7f8f9;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #424242;
+  letter-spacing: -0.3px;
+  width: fit-content;
+}
+
+.popular-text {
+  flex: 1;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #212124;
+  letter-spacing: -0.325px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+}
+
+.popular-comments {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.popular-comment-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.popular-comments span {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #a1a1a1;
+  letter-spacing: -0.325px;
+}
+
+.popular-divider {
+  height: 0;
+  width: 342px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.divider-img {
+  width: 100%;
+  height: 1px;
+  display: block;
 }
 
 /* 하단 네비게이션 바 */
@@ -320,7 +479,7 @@
   align-items: center;
   justify-content: center;
   padding: 0 20px;
-  min-height: 50px; /* 아이콘 + 텍스트 높이 */
+  min-height: 50px;
 }
 
 .bottom-nav-item {
@@ -368,11 +527,10 @@
   opacity: 1;
 }
 
-
 /* 글쓰기 플로팅 버튼 */
 .write-btn {
   position: absolute;
-  bottom: 98px; /* 네비게이션 바 콘텐츠 영역 상단(84px) + 여백(14px) = 98px */
+  bottom: 98px;
   right: 14px;
   display: flex;
   gap: 4px;
@@ -418,7 +576,7 @@
     padding: 0;
   }
   
-  .home-screen {
+  .community-life-screen {
     width: 100vw;
     height: 100vh;
     border-radius: 0;
