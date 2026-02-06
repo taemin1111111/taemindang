@@ -86,11 +86,11 @@ function Login({ onClose, onLoginSuccess }) {
       } catch (error) {
         console.error('로그인 오류:', error);
         if (error.response && error.response.data && error.response.data.message) {
-          // 서버에서 보낸 에러 메시지를 화면 중앙 알림으로 표시
-          const errorMessage = error.response.data.message;
-          alert(errorMessage);
+          alert(error.response.data.message);
+        } else if (error.code === 'ERR_NETWORK' || error.message?.includes('Network')) {
+          alert('서버에 연결할 수 없습니다.\nPC에서 백엔드(포트 5000)가 실행 중인지, 에뮬레이터라면 10.0.2.2로 접속되는지 확인해주세요.');
         } else {
-          alert('로그인 중 오류가 발생했습니다.');
+          alert('로그인 중 오류가 발생했습니다.\n' + (error.message || ''));
         }
       }
     }

@@ -1,16 +1,37 @@
 import axios from 'axios';
+import { Capacitor } from '@capacitor/core';
 
-// Axios 인스턴스 생성
+const ANDROID_API_BASE = 'http://10.0.2.2:5000';
+
+// 앱(Android WebView)인지: 요청 시점에 매번 확인
+function isAndroidApp() {
+  if (typeof window === 'undefined' || !window.location) return false;
+  try {
+    if (Capacitor?.isNativePlatform?.() && Capacitor.getPlatform() === 'android') return true;
+  } catch (_) {}
+  const { protocol, hostname } = window.location;
+  if (hostname === 'localhost' && (protocol === 'https:' || protocol === 'capacitor:')) return true;
+  if (String(window.location.origin || '').startsWith('capacitor://')) return true;
+  return false;
+}
+
+const defaultBaseURL = import.meta.env.VITE_API_URL || '/api';
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: defaultBaseURL,
   headers: {
     'Content-Type': 'application/json'
   }
 });
 
-// 요청 인터셉터: 모든 요청에 토큰 자동 추가
+// 요청 직전에 앱이면 10.0.2.2로 보내기 (Capacitor가 localhost를 로컬로 잡아서 네트워크 요청이 안 나감)
 api.interceptors.request.use(
   (config) => {
+    if (isAndroidApp()) {
+      config.baseURL = ANDROID_API_BASE;
+      if (typeof config.url === 'string' && config.url.startsWith('/api')) {
+        config.url = config.url.replace(/^\/api/, '') || '/';
+      }
+    }
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

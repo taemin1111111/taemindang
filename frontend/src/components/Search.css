@@ -199,7 +199,7 @@
 /* 연관 검색어 영역 */
 .search-suggestions-section {
   position: absolute;
-  top: 108px; /* 네비게이션 바 아래 */
+  top: 76px; /* 네비게이션 바(56px) + 검색창과 자동완성 간격 20px */
   left: 16px;
   width: 344px;
   display: flex;

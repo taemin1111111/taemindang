@@ -80,17 +80,30 @@ function ItemDetail({ itemId, onClose, onItemClick, onOpenItemChats }) {
     return `${parseInt(price).toLocaleString()}원`;
   };
 
-  // 찜 버튼 클릭 핸들러
+  // 찜 버튼 클릭 핸들러 (Optimistic UI: 클릭 즉시 반영, 실패 시 롤백)
   const handleLikeClick = async () => {
+    const prevLiked = isLiked;
+    const prevCount = likeCount;
+
+    // 즉시 UI 반영
+    setIsLiked(!prevLiked);
+    setLikeCount((c) => (prevLiked ? c - 1 : c + 1));
+
     try {
       const response = await api.post(`/items/${itemId}/like`);
-      
       if (response.data.success) {
+        // 서버 값으로 동기화 (선택)
         setIsLiked(response.data.data.is_liked);
         setLikeCount(response.data.data.like_count);
+      } else {
+        setIsLiked(prevLiked);
+        setLikeCount(prevCount);
       }
     } catch (error) {
       console.error('찜 추가/삭제 오류:', error);
+      // 실패 시 롤백
+      setIsLiked(prevLiked);
+      setLikeCount(prevCount);
       if (error.response?.status === 401) {
         alert('로그인이 필요합니다');
       } else {

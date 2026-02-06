@@ -258,9 +258,9 @@
   position: relative;
 }
 
-/* 시작하기 버튼 */
+/* 시작하기 버튼 - 카카오와 동일 너비(100%)로 앱/데스크톱 통일 */
 .btn-start {
-  width: 335px;
+  width: 100%;
   height: 52px;
   background-color: #ff6f0f;
   border: none;

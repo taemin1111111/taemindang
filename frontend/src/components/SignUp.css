@@ -96,21 +96,27 @@
 .nav-left {
   display: flex;
   align-items: center;
-  padding: 10px 0;
-  padding-left: 16px;
   width: 104px;
   justify-content: flex-start;
+  position: relative;
 }
 
+/* X 버튼: 왼쪽 16px, 네비 바 세로 중앙 (피그마 1자 정렬) */
 .close-btn {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
   background: none;
   border: none;
-  padding: 0;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
 }
 
 .close-icon {
@@ -119,6 +125,7 @@
   display: block;
 }
 
+/* 회원가입 제목: 네비 바 세로 중앙 (X와 1자 정렬) */
 .nav-title {
   display: flex;
   align-items: center;
