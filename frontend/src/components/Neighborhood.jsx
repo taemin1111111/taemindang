@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from '../utils/axios';
+import api from '../utils/axios.js';
 import './Neighborhood.css';
 
 // Figma 이미지 URL
@@ -31,7 +31,7 @@ function Neighborhood({ onClose, onConfirm }) {
             return;
           }
         }
-        const res = await axios.get('/auth/me');
+        const res = await api.get('/auth/me');
         if (res.data.success && res.data.data?.neighborhood) {
           setSelectedNeighborhood(res.data.data.neighborhood);
         }
@@ -55,7 +55,7 @@ function Neighborhood({ onClose, onConfirm }) {
     }
 
     try {
-      const response = await axios.put('/auth/neighborhood', {
+      const response = await api.put('/auth/neighborhood', {
         neighborhood: selectedNeighborhood
       });
 

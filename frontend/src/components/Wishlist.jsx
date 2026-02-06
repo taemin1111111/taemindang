@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './Wishlist.css';
 import './Home.css'; /* product-card 스타일 재사용 */
-import api from '../utils/axios.js';
+import api, { getImageUrl } from '../utils/axios.js';
 
 const imgThumbnail = 'https://www.figma.com/api/mcp/asset/29745e78-527b-44cc-9de9-4ef63a65b15f';
 const imgComponent592 = 'https://www.figma.com/api/mcp/asset/43b1bb59-9ac5-4ab2-b560-97dce79d6e1a';
@@ -79,7 +79,7 @@ function Wishlist({ onClose, onItemClick }) {
                 >
                   <div className="product-thumbnail">
                     {item.image_url ? (
-                      <img alt={item.title} src={item.image_url} />
+                      <img alt={item.title} src={getImageUrl(item.image_url)} />
                     ) : (
                       <img alt="product" src={imgThumbnail} />
                     )}

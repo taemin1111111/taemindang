@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../utils/axios.js';
 import './Login.css';
 
 // Figma 이미지 URL
@@ -63,7 +63,7 @@ function Login({ onClose, onLoginSuccess }) {
     // 모든 필드가 채워져 있고 검증 통과하면 로그인 API 호출
     if (!newErrors.email && !newErrors.password) {
       try {
-        const response = await axios.post('/api/auth/login', {
+        const response = await api.post('/auth/login', {
           email: formData.email.trim(),
           password: formData.password
         });

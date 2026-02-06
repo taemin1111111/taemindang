@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import './SearchResults.css';
-import api from '../utils/axios.js';
+import api, { getImageUrl } from '../utils/axios.js';
 
 // Figma 이미지 URL
 const imgChevronLeft = "https://www.figma.com/api/mcp/asset/d51ef680-70fe-4cf5-a813-8a77926678e0";
@@ -169,7 +169,7 @@ function SearchResults({ keyword, onClose, onItemClick, onNavigate }) {
                   >
                     <div className="search-results-item-thumbnail">
                       {item.image_url ? (
-                        <img alt={item.title} src={item.image_url} className="search-results-item-image" />
+                        <img alt={item.title} src={getImageUrl(item.image_url)} className="search-results-item-image" />
                       ) : (
                         <div className="search-results-item-placeholder" />
                       )}
@@ -247,7 +247,7 @@ function SearchResults({ keyword, onClose, onItemClick, onNavigate }) {
                       >
                         <div className="search-results-item-thumbnail">
                           {item.image_url ? (
-                            <img alt={item.title} src={item.image_url} className="search-results-item-image" />
+                            <img alt={item.title} src={getImageUrl(item.image_url)} className="search-results-item-image" />
                           ) : (
                             <div className="search-results-item-placeholder" />
                           )}

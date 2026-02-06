@@ -31,3 +31,55 @@ body {
   width: 100%;
   margin: 0;
 }
+
+/* =========================
+   Native app (Capacitor) overrides
+   - 기존 CSS는 "PC에서 375x812 목업"을 전제로 작성됨
+   - 앱(WebView)에서는 전체 화면(100vw/100dvh)으로 강제
+========================= */
+
+.native-app body {
+  background-color: #ffffff;
+}
+
+.native-app,
+.native-app body,
+.native-app #root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.native-app .mobile-container {
+  padding: 0 !important;
+  min-height: 100dvh !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  align-items: stretch !important;
+  justify-content: stretch !important;
+  background-color: #ffffff !important;
+}
+
+.native-app .main-tabs-frame {
+  width: 100% !important; /* 100vw는 WebView에서 1~몇px 오버플로우 나서 잘림 발생 가능 */
+  max-width: 100% !important;
+  height: 100dvh !important;
+  overflow: hidden;
+}
+
+/* 대부분의 화면 루트 컨테이너가 `*-screen` 형태라서 전역으로 풀스크린 적용 */
+.native-app [class*="-screen"] {
+  width: 100% !important; /* 100vw → 100% (가로 잘림/흰공간 방지) */
+  max-width: 100% !important;
+  height: 100dvh !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.native-app .bottom-nav {
+  padding-bottom: max(34px, env(safe-area-inset-bottom, 0px)) !important;
+}
+
+.native-app .write-btn {
+  bottom: calc(98px + env(safe-area-inset-bottom, 0px)) !important;
+}

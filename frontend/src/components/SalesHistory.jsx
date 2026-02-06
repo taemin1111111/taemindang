@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './SalesHistory.css';
 import './Home.css'; /* product-card 스타일 재사용 */
-import api from '../utils/axios.js';
+import api, { getImageUrl } from '../utils/axios.js';
 import defaultAvatar from '../assets/ratio.png';
 
 const imgThumbnail = 'https://www.figma.com/api/mcp/asset/29745e78-527b-44cc-9de9-4ef63a65b15f';
@@ -74,7 +74,7 @@ function SalesHistory({ onClose, onItemClick, onWritePost }) {
         <div className="sales-history-body">
           <div className="sales-history-profile-row">
             <div className="sales-history-avatar">
-            <img src={user?.profile_image || defaultAvatar} alt="" className="sales-history-avatar-img" />
+            <img src={getImageUrl(user?.profile_image) || defaultAvatar} alt="" className="sales-history-avatar-img" />
           </div>
             <button type="button" className="sales-history-write-btn" onClick={() => onWritePost && onWritePost()}>
               글쓰기
@@ -117,7 +117,7 @@ function SalesHistory({ onClose, onItemClick, onWritePost }) {
                 >
                   <div className="product-thumbnail">
                     {item.image_url ? (
-                      <img alt={item.title} src={item.image_url} />
+                      <img alt={item.title} src={getImageUrl(item.image_url)} />
                     ) : (
                       <img alt="product" src={imgThumbnail} />
                     )}

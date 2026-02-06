@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import './Home.css';
-import api from '../utils/axios.js';
+import api, { getImageUrl } from '../utils/axios.js';
 import { getItemsFromCache, setItemsCache } from '../utils/itemsCache.js';
 
 // Figma 이미지 URL
@@ -122,6 +122,7 @@ function Home({ onWritePost, onItemClick, onNavigate, onSearch, currentScreen = 
   };
   const screen = (
     <div className="home-screen">
+      <div className="home-header">
         {/* 상단 44px 상태바 공간 */}
         <div className="home-status-bar" aria-hidden="true" />
         {/* 네비게이션 바 */}
@@ -140,7 +141,7 @@ function Home({ onWritePost, onItemClick, onNavigate, onSearch, currentScreen = 
 
         {/* 필터 버튼들 */}
         <div className="filter-section">
-          <div 
+          <div
             className="filter-buttons"
             ref={filterButtonsRef}
             onMouseDown={handleMouseDown}
@@ -156,9 +157,10 @@ function Home({ onWritePost, onItemClick, onNavigate, onSearch, currentScreen = 
             ))}
           </div>
         </div>
+      </div>
 
         {/* 상품 리스트 */}
-        <div className="product-list">
+        <div className="product-list" role="region" aria-label="상품 목록">
           {loading ? (
             <div style={{ padding: '20px', textAlign: 'center' }}>로딩 중...</div>
           ) : items.length === 0 ? (
@@ -173,7 +175,7 @@ function Home({ onWritePost, onItemClick, onNavigate, onSearch, currentScreen = 
               >
                 <div className="product-thumbnail">
                   {item.image_url ? (
-                    <img alt={item.title} src={item.image_url} />
+                    <img alt={item.title} src={getImageUrl(item.image_url)} />
                   ) : (
                     <img alt="product" src={imgThumbnail} />
                   )}

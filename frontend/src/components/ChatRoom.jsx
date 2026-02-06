@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import './ChatRoom.css';
-import api from '../utils/axios.js';
+import api, { getImageUrl } from '../utils/axios.js';
 import defaultAvatar from '../assets/ratio.png';
 
 // Figma 이미지 URL
@@ -332,7 +332,7 @@ function ChatRoom({ chatId, onClose, onNavigateToAppointment }) {
               <div className="chat-room-item-thumbnail">
                 {item.images && item.images.length > 0 ? (
                   <img 
-                    src={item.images[0].image_url} 
+                    src={getImageUrl(item.images[0].image_url)} 
                     alt={item.title}
                     className="chat-room-item-thumbnail-img"
                   />
@@ -397,7 +397,7 @@ function ChatRoom({ chatId, onClose, onNavigateToAppointment }) {
                   <div className="chat-room-message-item-row">
                     {!message.is_mine && (
                       <div className="chat-room-message-avatar">
-                        <img src={chat?.other_user_profile_image || defaultAvatar} alt="" className="chat-room-message-avatar-img" />
+                        <img src={getImageUrl(chat?.other_user_profile_image) || defaultAvatar} alt="" className="chat-room-message-avatar-img" />
                       </div>
                     )}
                     <div className="chat-room-message-content-wrapper">
@@ -424,7 +424,7 @@ function ChatRoom({ chatId, onClose, onNavigateToAppointment }) {
                             )}
                             {message.image_url && (
                               <div className={`chat-room-message-bubble chat-room-message-image-wrap ${message.is_mine ? 'chat-room-message-bubble-mine' : ''}`}>
-                                <img src={message.image_url} alt="전송된 사진" className="chat-room-message-image" />
+                                <img src={getImageUrl(message.image_url)} alt="전송된 사진" className="chat-room-message-image" />
                               </div>
                             )}
                           </>

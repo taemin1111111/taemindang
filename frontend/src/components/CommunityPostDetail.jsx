@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './CommunityPostDetail.css';
-import api from '../utils/axios.js';
+import api, { getImageUrl } from '../utils/axios.js';
 import defaultAvatar from '../assets/ratio.png';
 
 // Figma 이미지 URL
@@ -135,7 +135,7 @@ function CommunityPostDetail({ postId, onClose }) {
               </div>
               <div className="community-post-detail-user-info">
                 <div className="community-post-detail-user-avatar">
-                  <img alt="user" src={post.user_profile_image || defaultAvatar} className="community-post-detail-avatar-img" />
+                  <img alt="user" src={getImageUrl(post.user_profile_image) || defaultAvatar} className="community-post-detail-avatar-img" />
                 </div>
                 <div className="community-post-detail-user-details">
                   <p className="community-post-detail-username">{post.user_nickname || '사용자명'}</p>
@@ -174,7 +174,7 @@ function CommunityPostDetail({ postId, onClose }) {
                 <div key={comment.id} className="community-post-detail-comment-item">
                   <div className="community-post-detail-comment-user-info">
                     <div className="community-post-detail-comment-avatar">
-                      <img alt="user" src={comment.user_profile_image || defaultAvatar} className="community-post-detail-comment-avatar-img" />
+                      <img alt="user" src={getImageUrl(comment.user_profile_image) || defaultAvatar} className="community-post-detail-comment-avatar-img" />
                     </div>
                     <div className="community-post-detail-comment-user-details">
                       <p className="community-post-detail-comment-username">{comment.user_nickname || '사용자명'}</p>

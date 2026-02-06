@@ -180,6 +180,7 @@ function CommunityLife({ onNavigate, onWritePost, onSearch, currentScreen = 'com
 
   const screen = (
     <div className="community-life-screen">
+      <div className="community-life-header">
         {/* 상단 44px 상태바 공간 */}
         <div className="community-life-status-bar" aria-hidden="true" />
         {/* 네비게이션 바 */}
@@ -198,7 +199,7 @@ function CommunityLife({ onNavigate, onWritePost, onSearch, currentScreen = 'com
 
         {/* 필터 버튼들 */}
         <div className="filter-section">
-          <div 
+          <div
             className="filter-buttons"
             ref={filterButtonsRef}
             onMouseDown={handleFilterMouseDown}
@@ -212,10 +213,10 @@ function CommunityLife({ onNavigate, onWritePost, onSearch, currentScreen = 'com
                   onClick={() => setSelectedFilter(filter.label)}
                 >
                   {filter.hasIcon && (
-                    <img 
-                      alt="fire" 
-                      src={isActive ? imgFireActive : imgFire} 
-                      className="filter-icon" 
+                    <img
+                      alt="fire"
+                      src={isActive ? imgFireActive : imgFire}
+                      className="filter-icon"
                     />
                   )}
                   {filter.label}
@@ -224,9 +225,10 @@ function CommunityLife({ onNavigate, onWritePost, onSearch, currentScreen = 'com
             })}
           </div>
         </div>
+      </div>
 
         {/* 게시글 리스트 */}
-        <div className="post-list" ref={postListRef}>
+        <div className="post-list" ref={postListRef} role="region" aria-label="동네생활 글 목록">
           {loading ? (
             <div style={{ padding: '20px', textAlign: 'center' }}>로딩 중...</div>
           ) : (

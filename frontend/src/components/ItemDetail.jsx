@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './ItemDetail.css';
-import api from '../utils/axios.js';
+import api, { getImageUrl } from '../utils/axios.js';
 import defaultAvatar from '../assets/ratio.png';
 
 // Figma 이미지 URL
@@ -184,7 +184,7 @@ function ItemDetail({ itemId, onClose, onItemClick, onOpenItemChats }) {
             {currentImage ? (
             <img 
               alt={item.title} 
-              src={currentImage.image_url} 
+              src={getImageUrl(currentImage.image_url)} 
               className="item-main-image"
             />
           ) : (
@@ -223,7 +223,7 @@ function ItemDetail({ itemId, onClose, onItemClick, onOpenItemChats }) {
             <div className="item-seller-section">
               <div className="item-seller-info">
                 <div className="item-seller-avatar">
-                  <img src={item.seller_profile_image || defaultAvatar} alt="" className="item-seller-avatar-img" />
+                  <img src={getImageUrl(item.seller_profile_image) || defaultAvatar} alt="" className="item-seller-avatar-img" />
                 </div>
                 <div className="item-seller-details">
                   <p className="item-seller-name">{item.seller_nickname || '판매자'}</p>
@@ -264,7 +264,7 @@ function ItemDetail({ itemId, onClose, onItemClick, onOpenItemChats }) {
                       {otherItem.image_url ? (
                         <img 
                           alt={otherItem.title} 
-                          src={otherItem.image_url} 
+                          src={getImageUrl(otherItem.image_url)} 
                           className="item-other-image"
                         />
                       ) : (

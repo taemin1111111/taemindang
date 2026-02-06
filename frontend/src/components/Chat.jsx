@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './Chat.css';
 import './Home.css'; /* 하단 네비 홈과 동일 (아이콘·스타일) */
-import api from '../utils/axios.js';
+import api, { getImageUrl } from '../utils/axios.js';
 import emptyChatIcon from '../assets/empty-chat-icon.svg';
 import defaultAvatar from '../assets/ratio.png';
 
@@ -151,7 +151,7 @@ function Chat({ onNavigate, embedded = false }) {
                     {/* 상대방 프로필 이미지 */}
                     <div className="chat-item-profile">
                       <div className="chat-profile-avatar">
-                        <img src={chat.other_user_profile_image || defaultAvatar} alt="" className="chat-profile-avatar-img" />
+                        <img src={getImageUrl(chat.other_user_profile_image) || defaultAvatar} alt="" className="chat-profile-avatar-img" />
                       </div>
                     </div>
 
@@ -184,7 +184,7 @@ function Chat({ onNavigate, embedded = false }) {
                     <div className="chat-item-thumbnail">
                       {chat.item_image ? (
                         <img 
-                          src={chat.item_image} 
+                          src={getImageUrl(chat.item_image)} 
                           alt={chat.item_title} 
                           className="chat-thumbnail-image"
                         />

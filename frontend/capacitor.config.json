@@ -1,5 +1,11 @@
 {
   "appId": "com.taemindang.app",
   "appName": "taemindang",
-  "webDir": "dist"
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "http"
+  },
+  "android": {
+    "allowMixedContent": true
+  }
 }

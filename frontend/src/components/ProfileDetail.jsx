@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './ProfileDetail.css';
-import api from '../utils/axios.js';
+import api, { getImageUrl } from '../utils/axios.js';
 import defaultAvatar from '../assets/ratio.png';
 
 function ProfileDetail({ onClose, onNavigate }) {
@@ -62,7 +62,7 @@ function ProfileDetail({ onClose, onNavigate }) {
         <div className="profile-detail-body">
           <section className="profile-detail-top">
             <div className="profile-detail-avatar">
-              <img src={user?.profile_image || defaultAvatar} alt="" className="profile-detail-avatar-img" />
+              <img src={getImageUrl(user?.profile_image) || defaultAvatar} alt="" className="profile-detail-avatar-img" />
             </div>
             <div className="profile-detail-info">
               <span className="profile-detail-name">{nickname}</span>

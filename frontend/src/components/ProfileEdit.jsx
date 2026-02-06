@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import './ProfileEdit.css';
-import api from '../utils/axios.js';
+import api, { getImageUrl } from '../utils/axios.js';
 import ratioImg from '../assets/ratio.png';
 
 function ProfileEdit({ onClose }) {
@@ -118,7 +118,7 @@ function ProfileEdit({ onClose }) {
           {/* 프로필 사진: 좌 121 / 우 122, 아래 30 (사진 수치) */}
           <div className="profile-edit-avatar-wrap">
             <div className="profile-edit-avatar">
-              <img src={user?.profile_image || ratioImg} alt="" className="profile-edit-avatar-img" />
+              <img src={getImageUrl(user?.profile_image) || ratioImg} alt="" className="profile-edit-avatar-img" />
             </div>
             <input
               ref={fileInputRef}

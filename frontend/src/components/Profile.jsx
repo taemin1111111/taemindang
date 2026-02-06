@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './Profile.css';
 import './Home.css'; /* 하단 네비 아이콘/위치 홈과 동일하게 */
-import api from '../utils/axios.js';
+import api, { getImageUrl } from '../utils/axios.js';
 import defaultAvatar from '../assets/ratio.png';
 
 // 하단 네비: Home.jsx와 동일한 이미지 URL
@@ -75,7 +75,7 @@ function Profile({ onNavigate, currentScreen = 'profile', embedded = false }) {
             tabIndex={0}
           >
             <div className="profile-card-avatar">
-              <img src={user?.profile_image || defaultAvatar} alt="" className="profile-card-avatar-img" />
+              <img src={getImageUrl(user?.profile_image) || defaultAvatar} alt="" className="profile-card-avatar-img" />
             </div>
             <div className="profile-card-info">
               <span className="profile-card-name">{nickname}</span>

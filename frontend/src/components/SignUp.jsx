@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../utils/axios.js';
 import './SignUp.css';
 
 // Figma 이미지 URL
@@ -137,7 +137,7 @@ function SignUp({ onClose, onSignUpSuccess }) {
     if (!newErrors.email && !newErrors.password && !newErrors.passwordConfirm && !newErrors.nickname) {
       try {
         // 1. 먼저 이메일 중복 확인
-        const emailCheckResponse = await axios.post('/api/auth/check-email', {
+        const emailCheckResponse = await api.post('/auth/check-email', {
           email: formData.email.trim()
         });
 
@@ -151,7 +151,7 @@ function SignUp({ onClose, onSignUpSuccess }) {
         }
 
         // 2. 이메일 중복이 아니면 회원가입 진행
-        const response = await axios.post('/api/auth/signup', {
+        const response = await api.post('/auth/signup', {
           email: formData.email.trim(),
           password: formData.password,
           nickname: formData.nickname.trim()

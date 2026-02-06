@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './ItemChatList.css';
-import api from '../utils/axios.js';
+import api, { getImageUrl } from '../utils/axios.js';
 import emptyChatIcon from '../assets/empty-chat-icon.svg';
 import defaultAvatar from '../assets/ratio.png';
 
@@ -100,7 +100,7 @@ function ItemChatList({ itemId, onClose, onNavigate }) {
                     <div className="item-chat-list-item-content">
                       <div className="item-chat-list-profile">
                         <div className="item-chat-list-avatar">
-                          <img src={chat.other_user_profile_image || defaultAvatar} alt="" className="item-chat-list-avatar-img" />
+                          <img src={getImageUrl(chat.other_user_profile_image) || defaultAvatar} alt="" className="item-chat-list-avatar-img" />
                         </div>
                       </div>
                       <div className="item-chat-list-info">
@@ -124,7 +124,7 @@ function ItemChatList({ itemId, onClose, onNavigate }) {
                       </div>
                       <div className="item-chat-list-thumb">
                         {chat.item_image ? (
-                          <img src={chat.item_image} alt="" className="item-chat-list-thumb-img" />
+                          <img src={getImageUrl(chat.item_image)} alt="" className="item-chat-list-thumb-img" />
                         ) : (
                           <div className="item-chat-list-thumb-placeholder" />
                         )}
